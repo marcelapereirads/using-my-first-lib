@@ -1,0 +1,26 @@
+@import "/src/assets/variables";
+
+.header {
+    background-color: $navy-blue;
+    align-items: center;
+    justify-content: space-evenly;
+
+    button {
+        border: 0;
+        background-color: $navy-blue;
+    }
+
+    p {
+        color: $white;
+        text-align: center;
+        font-size: 2.5em;
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 0;
+    }
+}
+
+@media (min-width: $mobile-width) {
+    .header__menu {
+        display: none;
+    }
+}
