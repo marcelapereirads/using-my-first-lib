@@ -1,0 +1,16 @@
+@import "/src/assets/variables";
+
+.menu {
+    &__list {
+        padding-left: 0;
+    }
+
+    &__item {
+       list-style-type: none;
+       border-bottom: 1px solid;
+
+       &:hover {
+           background-color: $light-gray;
+       }
+    }
+}
