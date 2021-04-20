@@ -1,0 +1,15 @@
+@import "/src/assets/variables";
+
+.page {
+    &__title {
+        color: $yellow;
+    }
+
+    &__separator {
+        border: solid $yellow;
+    }
+
+    &__content {
+        margin-top: 32px;
+    }
+}

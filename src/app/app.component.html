@@ -1,4 +1,7 @@
-<app-header></app-header>
-<div class="row">
-    <app-sidebar-menu class="col-10 col-md-8 col-lg-4 col-xl-2"></app-sidebar-menu>
+<div class="page">
+    <app-header></app-header>
+    <div class="page__content">
+        <app-sidebar-menu class="page__sidebar"></app-sidebar-menu><!-- col-sm-2 col-10 -->
+        <router-outlet></router-outlet>
+    </div>
 </div>

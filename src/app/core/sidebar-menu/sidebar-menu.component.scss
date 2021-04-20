@@ -1,6 +1,11 @@
 @import "/src/assets/variables";
 
 .menu {
+    min-width: 175px;
+    max-width: 250px;
+    height: 100%;
+    border: solid 1px;
+
     &__list {
         padding-left: 0;
     }
@@ -8,9 +13,17 @@
     &__item {
        list-style-type: none;
        border-bottom: 1px solid;
+       font-size: 30px;
+       padding-left: 2px;
 
        &:hover {
            background-color: $light-gray;
        }
+    }
+}
+
+@media (min-width: $mobile-width) {
+    .menu__item {
+        font-size: 1rem;
     }
 }
