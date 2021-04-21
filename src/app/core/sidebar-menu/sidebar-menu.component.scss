@@ -17,8 +17,20 @@
        padding-left: 2px;
 
        &:hover {
-           background-color: $light-gray;
+           background-color: $dark-gray;
        }
+    }
+
+    &__item--active {
+        background-color: $navy-blue;
+
+        .menu__link {
+            color: $yellow;
+        }
+
+        &:hover {
+            background-color: $navy-blue;
+        }
     }
 }
 
