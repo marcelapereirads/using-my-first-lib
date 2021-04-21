@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { DefaultPageModule } from '../default-page/default-page.module';
 import { InputPageComponent } from './input-page.component';
+import { InputModule } from 'src/app/components/input/input.module';
 
 @NgModule({
   declarations: [
@@ -10,7 +11,8 @@ import { InputPageComponent } from './input-page.component';
   ],
   imports: [
     CommonModule,
-    DefaultPageModule
+    DefaultPageModule,
+    InputModule
   ]
 })
 export class InputPageModule { }

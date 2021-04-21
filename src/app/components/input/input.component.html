@@ -1,0 +1,15 @@
+<div class="input d-flex flex-column">
+    <label [for]="id">{{label}}</label>
+    <input
+        [type]="type"
+        [id]="id"
+        class="input__field"
+        [mask]="mask"
+        [formControl]="control"
+        [ngClass]="{disabled: disabled}"
+    />
+    <div *ngIf="control.touched && control.invalid" class="input__error d-flex">
+        <img src="assets/svg/error.svg" alt="error" />
+        <span>{{error[0]}}</span>
+    </div>
+</div>
