@@ -8,5 +8,11 @@ import { Component, Input } from '@angular/core';
 export class DefaultPageComponent {
 
   @Input() title = '';
+  @Input() code = '';
+  showPreview = true;
+
+  changeView() {
+    this.showPreview = !this.showPreview;
+  }
 
 }

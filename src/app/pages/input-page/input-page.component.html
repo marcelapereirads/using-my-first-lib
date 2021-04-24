@@ -1,6 +1,12 @@
-<app-default-page [title]="'Input'">
-    <app-input label="Simple Input" id="simple-input" [disabled]="false"></app-input>
-    <app-input label="Disabled Input" id="disabled-input" [disabled]="true"></app-input>
-    <app-input label="Input With Mask" id="mask-input" [mask]="'(00) 00000-0000'"></app-input>
-    <app-input label="Error Input" id="error-input" [errors]="errors" [control]="control"></app-input>
+<app-default-page [title]="'Input'" [code]="code">
+    <div class="page">
+        <app-input
+            label="Input field"
+            id="simple-input"
+            [disabled]="false"
+            [errors]="errors"
+            [control]="control"
+        >
+        </app-input>
+    </div>
 </app-default-page>

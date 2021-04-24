@@ -1,7 +1,17 @@
-<div class="page container">
-    <h2 class="page__title">{{title}}</h2>
-    <div class="page__separator"></div>
-    <div class="page__content">
-        <ng-content></ng-content>
+<div class="default container">
+    <h2 class="default__title">{{title}}</h2>
+    <div class="default__separator"></div>
+    <div class="default__content">
+        <div class="default__preview" [ngClass]="{hide: !showPreview}">
+            <ng-content></ng-content>
+        </div>
+        <div class="default__code" [ngClass]="{hide: showPreview}">
+            {{code}}
+        </div>
+        <div class="">
+            <button class="default__action" (click)="changeView()">
+                <img src="assets/svg/code.svg" alt="code" />
+            </button>
+        </div>
     </div>
 </div>

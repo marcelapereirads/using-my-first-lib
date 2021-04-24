@@ -1,6 +1,6 @@
 @import "/src/assets/variables";
 
-.page {
+.default {
     &__title {
         color: $yellow;
     }
@@ -11,5 +11,22 @@
 
     &__content {
         margin-top: 32px;
+        padding: 16px;
+        border: solid 1px;
     }
+
+    &__action {
+        border: none;
+        background-color: $white;
+        display: flex;
+        padding: 4px;
+
+        &:hover {
+            background-color: $light-gray;
+        }
+    }
+}
+
+.hide {
+    display: none;
 }
