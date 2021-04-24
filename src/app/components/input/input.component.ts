@@ -13,7 +13,7 @@ export class InputComponent implements OnChanges {
   @Input() id = 'input';
   @Input() disabled = false;
   @Input() mask = '';
-  @Input() error = [];
+  @Input() errors: Array<string> = [];
   @Input() control = new FormControl({value: null});
 
   ngOnChanges(change: SimpleChanges) {

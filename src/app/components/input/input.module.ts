@@ -13,7 +13,8 @@ import { InputComponent } from './input.component';
   imports: [
     CommonModule,
     NgxMaskModule.forRoot(),
-    FormsModule, ReactiveFormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     InputComponent
