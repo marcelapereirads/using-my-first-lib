@@ -15,6 +15,10 @@
        font-size: 30px;
        padding-left: 2px;
 
+       .menu__link {
+           display: block;
+       }
+
        &:hover {
            background-color: $dark-gray;
        }
