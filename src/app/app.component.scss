@@ -1,9 +1,34 @@
-.page {
-    &__sidebar {
+@import "/src/assets/variables";
 
+.page {
+    &__shaddow {
+        background-color: rgba(65%, 65%, 65%, 0.4);
+        width: 100%;
+        height: 100%;
+        position: absolute;
     }
 
-    &__content {
-        display: flex;
+    &__sidebar {
+        min-width: 300px;
+        max-width: 80%;
+        
+    }
+}
+
+@media (min-width: $mobile-width) {
+    .page {
+        &__content {
+            display: flex;
+        }
+
+        &__shaddow {
+            background: none;
+            position: relative;
+            width: unset;
+        }
+
+        &__sidebar {
+            max-width: 30%;
+        }
     }
 }

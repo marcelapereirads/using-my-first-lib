@@ -1,15 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+
+import { HamburgerButtonService } from '../header/hamburguer-button/hamburger-button.service';
 
 @Component({
   selector: 'app-sidebar-menu',
   templateUrl: './sidebar-menu.component.html',
   styleUrls: ['./sidebar-menu.component.scss']
 })
-export class SidebarMenuComponent implements OnInit {
+export class SidebarMenuComponent {
 
-  constructor() { }
+  menuItems = [
+    {
+      name: 'Input',
+      url: '/input'
+    }
+  ];
 
-  ngOnInit(): void {
+  constructor(private hamburgerButtonService: HamburgerButtonService) { }
+
+  closeMenu() {
+    this.hamburgerButtonService.emitClick();
   }
-
 }

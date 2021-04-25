@@ -1,8 +1,8 @@
 <aside class="menu">
     <nav>
         <ul class="menu__list">
-            <li class="menu__item" [routerLinkActive]="'menu__item--active'">
-                <a [routerLink]="['/input']" class="menu__link">Input</a>
+            <li class="menu__item" [routerLinkActive]="'menu__item--active'" *ngFor="let item of menuItems">
+                <a [routerLink]="[item.url]" class="menu__link" (click)="closeMenu()">{{item.name}}</a>
             </li>
             <li class="menu__item">Select</li>
         </ul>

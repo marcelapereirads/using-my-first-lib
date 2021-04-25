@@ -1,7 +1,13 @@
 <div class="page">
     <app-header></app-header>
     <div class="page__content">
-        <app-sidebar-menu class="page__sidebar"></app-sidebar-menu><!-- col-sm-2 col-10 -->
-        <router-outlet></router-outlet>
+        <div *ngIf="menuIsOpen" class="page__shaddow">
+            <div class="page__sidebar">
+                <app-sidebar-menu></app-sidebar-menu>
+            </div>
+        </div>
+        <div>
+            <router-outlet></router-outlet>
+        </div>
     </div>
 </div>

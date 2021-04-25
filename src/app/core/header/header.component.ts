@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+
+import { HamburgerButtonService } from './hamburguer-button/hamburger-button.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
-  constructor() { }
+  constructor(private hamburgerButtonService: HamburgerButtonService) { }
 
-  ngOnInit(): void {
+  closeMenu() {
+    this.hamburgerButtonService.closeMenu();
   }
 
 }

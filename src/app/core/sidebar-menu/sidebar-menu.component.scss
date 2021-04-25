@@ -1,10 +1,9 @@
 @import "/src/assets/variables";
 
 .menu {
-    min-width: 175px;
-    max-width: 250px;
     height: 100%;
     border: solid 1px;
+    background-color: $white;
 
     &__list {
         padding-left: 0;
@@ -30,6 +29,13 @@
 
         &:hover {
             background-color: $navy-blue;
+        }
+    }
+
+    &__link {
+        color: $navy-blue;
+        &:hover {
+            text-decoration: none;
         }
     }
 }

@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { HeaderComponent } from './header.component';
-import { HamburguerButtonComponent } from './hamburguer-button/hamburguer-button.component';
+import { HamburgerButtonComponent } from './hamburguer-button/hamburger-button.component';
 
-const components = [HeaderComponent, HamburguerButtonComponent]
+const components = [HeaderComponent, HamburgerButtonComponent]
 
 @NgModule({
   declarations: components,
