@@ -1,0 +1,16 @@
+@import "/src/assets/variables";
+
+.home {
+
+    margin: 32px;
+
+    &__title {
+        color: $yellow;
+        margin-bottom: 32px;
+    }
+
+    a {
+        color: $navy-blue;
+        text-decoration: underline;
+    }
+}
