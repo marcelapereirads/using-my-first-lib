@@ -25,5 +25,6 @@ export class SelectPageComponent {
   control = new FormControl(null, [Validators.required]);
 
   readonly error = 'Please fill in the field';
+  readonly code = `<app-select [options]="options" [label]="'Select'" [id]="'select'" [control]="control" [error]="error"></app-select>`;
 
 }

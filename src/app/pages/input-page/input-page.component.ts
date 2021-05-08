@@ -27,6 +27,6 @@ export class InputPageComponent {
 
   control = new FormControl(null, [Validators.required, Validators.maxLength(10)]);
 
-  code = `<app-input label="Input field" id="simple-input" [disabled]="false" [errors]="errors" [control]="control"></app-input>`;
+  readonly code = `<app-input label="Input field" id="simple-input" [disabled]="false" [errors]="errors" [control]="control"></app-input>`;
 
 }
