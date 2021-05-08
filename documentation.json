@@ -3,10 +3,10 @@
     "interfaces": [
         {
             "name": "IErrors",
-            "id": "interface-IErrors-0390dd66fea4748a6525633800e83ac4",
+            "id": "interface-IErrors-b7d1749ecebb3a2919f1883c46595c62",
             "file": "src/app/pages/input-page/input-page.component.ts",
             "type": "interface",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { FormControl, Validators } from '@angular/forms';\n\ninterface IErrors {\n  required: string;\n  maxlength: string;\n}\n\n@Component({\n  selector: 'app-input-page',\n  templateUrl: './input-page.component.html',\n  styleUrls: ['./input-page.component.scss']\n})\nexport class InputPageComponent {\n\n  get errors(): string[] {\n    const errorMessages: IErrors = {\n      required: 'Please fill in the field',\n      maxlength: 'The value exceeds the allowed number of characters'\n    };\n \n    if (this.control.errors !== null) {\n      return Object.keys(this.control.errors).map((error) => errorMessages[error as keyof IErrors]);\n    }\n\n    return [];\n  }\n\n  control = new FormControl(null, [Validators.required, Validators.maxLength(10)]);\n\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { FormControl, Validators } from '@angular/forms';\n\ninterface IErrors {\n  required: string;\n  maxlength: string;\n}\n\n@Component({\n  selector: 'app-input-page',\n  templateUrl: './input-page.component.html'\n})\nexport class InputPageComponent {\n\n  get errors(): string[] {\n    const errorMessages: IErrors = {\n      required: 'Please fill in the field',\n      maxlength: 'The value exceeds the allowed number of characters'\n    };\n \n    if (this.control.errors !== null) {\n      return Object.keys(this.control.errors).map((error) => errorMessages[error as keyof IErrors]);\n    }\n\n    return [];\n  }\n\n  control = new FormControl(null, [Validators.required, Validators.maxLength(10)]);\n\n  code = `<app-input label=\"Input field\" id=\"simple-input\" [disabled]=\"false\" [errors]=\"errors\" [control]=\"control\"></app-input>`;\n\n}\n",
             "properties": [
                 {
                     "name": "maxlength",
@@ -28,13 +28,94 @@
             "methods": []
         }
     ],
-    "injectables": [],
+    "injectables": [
+        {
+            "name": "HamburgerButtonService",
+            "id": "injectable-HamburgerButtonService-f1b63d038947c2f278570bc3388d2280",
+            "file": "src/app/core/header/hamburguer-button/hamburger-button.service.ts",
+            "properties": [
+                {
+                    "name": "buttonClicked$",
+                    "defaultValue": "new BehaviorSubject<boolean>(this.menuIsOpen)",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 13
+                },
+                {
+                    "name": "isMobile",
+                    "defaultValue": "this.breakpointObserver.isMatched('(min-width: 768px)')",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 11
+                },
+                {
+                    "name": "menuIsOpen",
+                    "defaultValue": "this.isMobile",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 12
+                }
+            ],
+            "methods": [
+                {
+                    "name": "closeMenu",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 24
+                },
+                {
+                    "name": "emitClick",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 17
+                },
+                {
+                    "name": "getOpen",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "Observable<boolean>",
+                    "typeParameters": [],
+                    "line": 30
+                }
+            ],
+            "description": "",
+            "sourceCode": "import { Injectable } from '@angular/core';\nimport { BreakpointObserver } from '@angular/cdk/layout';\n\nimport { BehaviorSubject, Observable } from 'rxjs';\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class HamburgerButtonService {\n\n  isMobile = this.breakpointObserver.isMatched('(min-width: 768px)');\n  menuIsOpen = this.isMobile;\n  buttonClicked$ = new BehaviorSubject<boolean>(this.menuIsOpen);\n\n  constructor(private breakpointObserver: BreakpointObserver) { }\n\n  emitClick(): void {\n    if (!this.isMobile) {\n      this.menuIsOpen = !this.menuIsOpen;\n      this.buttonClicked$.next(this.menuIsOpen);\n    }\n  }\n\n  closeMenu(): void {\n    if (!this.isMobile) {\n      this.menuIsOpen = false;\n    }\n  }\n\n  getOpen(): Observable<boolean> {\n    return this.buttonClicked$.asObservable();\n  }\n}\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [
+                    {
+                        "name": "breakpointObserver",
+                        "type": "BreakpointObserver"
+                    }
+                ],
+                "line": 13,
+                "jsdoctags": [
+                    {
+                        "name": "breakpointObserver",
+                        "type": "BreakpointObserver",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "type": "injectable"
+        }
+    ],
     "classes": [],
     "directives": [],
     "components": [
         {
             "name": "AppComponent",
-            "id": "component-AppComponent-9a01eb2eec8a8b505d006c3c7a29781d",
+            "id": "component-AppComponent-34e7bb58cd408649f019e440c35026ac",
             "file": "src/app/app.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -54,115 +135,98 @@
             "outputsClass": [],
             "propertiesClass": [
                 {
+                    "name": "menuIsOpen",
+                    "defaultValue": "true",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 14
+                },
+                {
+                    "name": "menuSubscription$",
+                    "type": "Subscription",
+                    "optional": false,
+                    "description": "",
+                    "line": 13
+                },
+                {
                     "name": "title",
                     "defaultValue": "'storybook-study'",
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 9
+                    "line": 12
                 }
             ],
-            "methodsClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnDestroy",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 22
+                },
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 18
+                },
+                {
+                    "name": "verifyMenuOpen",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 26
+                }
+            ],
             "hostBindings": [],
             "hostListeners": [],
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.scss']\n})\nexport class AppComponent {\n  title = 'storybook-study';\n}\n",
+            "sourceCode": "import { Component, OnDestroy, OnInit } from '@angular/core';\nimport { Subscription } from 'rxjs';\n\nimport { HamburgerButtonService } from './core/header/hamburguer-button/hamburger-button.service';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.scss']\n})\nexport class AppComponent implements OnInit, OnDestroy {\n  title = 'storybook-study';\n  menuSubscription$!: Subscription;\n  menuIsOpen = true;\n\n  constructor(private hamburgerButtonService: HamburgerButtonService) { }\n\n  ngOnInit() {\n    this.verifyMenuOpen();\n  }\n\n  ngOnDestroy() {\n    this.menuSubscription$.unsubscribe();\n  }\n\n  verifyMenuOpen() {\n    this.menuSubscription$ = this.hamburgerButtonService.getOpen().subscribe((isOpen: boolean) => this.menuIsOpen = isOpen);\n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".page {\r\n    &__sidebar {\r\n\r\n    }\r\n\r\n    &__content {\r\n        display: flex;\r\n    }\r\n}",
+                    "data": "@import \"/src/assets/variables\";\n\n.page {\n    &__shaddow {\n        background-color: rgba(65%, 65%, 65%, 0.4);\n        width: 100%;\n        height: 100%;\n        position: absolute;\n    }\n\n    &__sidebar {\n        min-width: 300px;\n        max-width: 80%;\n        \n    }\n\n    &__main {\n        width: 80%;\n    }\n}\n\n@media (min-width: $mobile-width) {\n    .page {\n        &__content {\n            display: flex;\n        }\n\n        &__shaddow {\n            background: none;\n            position: relative;\n            width: unset;\n        }\n\n        &__sidebar {\n            max-width: 30%;\n        }\n    }\n}\n",
                     "styleUrl": "./app.component.scss"
                 }
             ],
             "stylesData": "",
-            "templateData": "<div class=\"page\">\r\n    <app-header></app-header>\r\n    <div class=\"page__content\">\r\n        <app-sidebar-menu class=\"page__sidebar\"></app-sidebar-menu><!-- col-sm-2 col-10 -->\r\n        <router-outlet></router-outlet>\r\n    </div>\r\n</div>"
-        },
-        {
-            "name": "ButtonComponent",
-            "id": "component-ButtonComponent-642c6c4e474cd5a0ac760dfda26b2fc9",
-            "file": "src/stories/button.component.ts",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "storybook-button",
-            "styleUrls": [
-                "./button.css"
-            ],
-            "styles": [],
-            "template": "<button   type=\"button\"\n   (click)=\"onClick.emit($event)\"\n   [ngClass]=\"classes\"\n   [ngStyle]=\"{ 'background-color': backgroundColor }\"\n >\n   {{ label }}\n </button>",
-            "templateUrl": [],
-            "viewProviders": [],
-            "inputsClass": [
-                {
-                    "name": "backgroundColor",
-                    "description": "<p>What background color to use</p>\n",
-                    "line": 26,
-                    "type": "string"
-                },
-                {
-                    "name": "label",
-                    "defaultValue": "'Button'",
-                    "description": "<p>Button contents</p>\n",
-                    "line": 40
-                },
-                {
-                    "name": "primary",
-                    "defaultValue": "false",
-                    "description": "<p>Is this the principal call to action on the page?</p>\n",
-                    "line": 20
-                },
-                {
-                    "name": "size",
-                    "defaultValue": "'medium'",
-                    "description": "<p>How large should the button be?</p>\n",
-                    "line": 32,
-                    "type": "\"small\" | \"medium\" | \"large\""
-                }
-            ],
-            "outputsClass": [
-                {
-                    "name": "onClick",
-                    "defaultValue": "new EventEmitter<Event>()",
-                    "description": "<p>Optional click handler</p>\n",
-                    "line": 46,
-                    "type": "EventEmitter"
-                }
-            ],
-            "propertiesClass": [],
-            "methodsClass": [],
-            "hostBindings": [],
-            "hostListeners": [],
-            "description": "",
-            "rawdescription": "",
-            "type": "component",
-            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\n\n@Component({\n  selector: 'storybook-button',\n  template: ` <button\n    type=\"button\"\n    (click)=\"onClick.emit($event)\"\n    [ngClass]=\"classes\"\n    [ngStyle]=\"{ 'background-color': backgroundColor }\"\n  >\n    {{ label }}\n  </button>`,\n  styleUrls: ['./button.css'],\n})\nexport default class ButtonComponent {\n  /**\n   * Is this the principal call to action on the page?\n   */\n  @Input()\n  primary = false;\n\n  /**\n   * What background color to use\n   */\n  @Input()\n  backgroundColor?: string;\n\n  /**\n   * How large should the button be?\n   */\n  @Input()\n  size: 'small' | 'medium' | 'large' = 'medium';\n\n  /**\n   * Button contents\n   *\n   * @required\n   */\n  @Input()\n  label = 'Button';\n\n  /**\n   * Optional click handler\n   */\n  @Output()\n  onClick = new EventEmitter<Event>();\n\n  public get classes(): string[] {\n    const mode = this.primary ? 'storybook-button--primary' : 'storybook-button--secondary';\n\n    return ['storybook-button', `storybook-button--${this.size}`, mode];\n  }\n}\n",
-            "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": ".storybook-button {\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  font-weight: 700;\n  border: 0;\n  border-radius: 3em;\n  cursor: pointer;\n  display: inline-block;\n  line-height: 1;\n}\n.storybook-button--primary {\n  color: white;\n  background-color: #1ea7fd;\n}\n.storybook-button--secondary {\n  color: #333;\n  background-color: transparent;\n  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;\n}\n.storybook-button--small {\n  font-size: 12px;\n  padding: 10px 16px;\n}\n.storybook-button--medium {\n  font-size: 14px;\n  padding: 11px 20px;\n}\n.storybook-button--large {\n  font-size: 16px;\n  padding: 12px 24px;\n}\n",
-                    "styleUrl": "./button.css"
-                }
-            ],
-            "stylesData": "",
-            "accessors": {
-                "classes": {
-                    "name": "classes",
-                    "getSignature": {
-                        "name": "classes",
-                        "type": "[]",
-                        "returnType": "string[]",
-                        "line": 48
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [
+                    {
+                        "name": "hamburgerButtonService",
+                        "type": "HamburgerButtonService"
                     }
-                }
-            }
+                ],
+                "line": 14,
+                "jsdoctags": [
+                    {
+                        "name": "hamburgerButtonService",
+                        "type": "HamburgerButtonService",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "implements": [
+                "OnInit",
+                "OnDestroy"
+            ],
+            "templateData": "<div class=\"page\">\n    <app-header></app-header>\n    <div class=\"page__content\">\n        <div *ngIf=\"menuIsOpen\" class=\"page__shaddow\">\n            <div class=\"page__sidebar\">\n                <app-sidebar-menu></app-sidebar-menu>\n            </div>\n        </div>\n        <div class=\"page__main\">\n            <router-outlet></router-outlet>\n        </div>\n    </div>\n</div>"
         },
         {
             "name": "DefaultPageComponent",
-            "id": "component-DefaultPageComponent-e2ab4c97a3072480e2c78a46207a0acb",
+            "id": "component-DefaultPageComponent-bfe92b5ce53085977637627ba66d62fe",
             "file": "src/app/pages/default-page/default-page.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -180,9 +244,82 @@
             "viewProviders": [],
             "inputsClass": [
                 {
+                    "name": "code",
+                    "defaultValue": "''",
+                    "line": 11
+                },
+                {
                     "name": "title",
                     "defaultValue": "''",
                     "line": 10
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "showPreview",
+                    "defaultValue": "true",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 12
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "changeView",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 14
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\n\n@Component({\n  selector: 'app-default-page',\n  templateUrl: './default-page.component.html',\n  styleUrls: ['./default-page.component.scss']\n})\nexport class DefaultPageComponent {\n\n  @Input() title = '';\n  @Input() code = '';\n  showPreview = true;\n\n  changeView() {\n    this.showPreview = !this.showPreview;\n  }\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "@import \"/src/assets/variables\";\n\n.default {\n    &__title {\n        color: $yellow;\n    }\n\n    &__separator {\n        border: solid $yellow;\n    }\n\n    &__content {\n        margin-top: 32px;\n        padding: 16px;\n        border: solid 1px;\n    }\n\n    &__action {\n        border: none;\n        background-color: $white;\n        display: flex;\n        padding: 4px;\n\n        &:hover {\n            background-color: $light-gray;\n        }\n    }\n}\n\n.hide {\n    display: none;\n}",
+                    "styleUrl": "./default-page.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "templateData": "<div class=\"default container\">\n    <h2 class=\"default__title\">{{title}}</h2>\n    <div class=\"default__separator\"></div>\n    <div class=\"default__content\">\n        <div class=\"default__preview\" [ngClass]=\"{hide: !showPreview}\">\n            <ng-content></ng-content>\n        </div>\n        <div class=\"default__code\" [ngClass]=\"{hide: showPreview}\">\n            {{code}}\n        </div>\n        <div class=\"\">\n            <button class=\"default__action\" (click)=\"changeView()\">\n                <img src=\"assets/svg/code.svg\" alt=\"code\" />\n            </button>\n        </div>\n    </div>\n</div>"
+        },
+        {
+            "name": "ErrorComponent",
+            "id": "component-ErrorComponent-50654f08d652aa17cfbc59cc452330e3",
+            "file": "src/app/components/error/error.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-error",
+            "styleUrls": [
+                "./error.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./error.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "control",
+                    "defaultValue": "new FormControl({value: null})",
+                    "line": 11,
+                    "type": "FormControl"
+                },
+                {
+                    "name": "message",
+                    "defaultValue": "''",
+                    "line": 12
                 }
             ],
             "outputsClass": [],
@@ -193,33 +330,33 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\n\n@Component({\n  selector: 'app-default-page',\n  templateUrl: './default-page.component.html',\n  styleUrls: ['./default-page.component.scss']\n})\nexport class DefaultPageComponent {\n\n  @Input() title = '';\n\n}\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { FormControl } from '@angular/forms';\n\n@Component({\n  selector: 'app-error',\n  templateUrl: './error.component.html',\n  styleUrls: ['./error.component.scss']\n})\nexport class ErrorComponent {\n\n  @Input() control = new FormControl({value: null});\n  @Input() message = '';\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@import \"/src/assets/variables\";\r\n\r\n.page {\r\n    &__title {\r\n        color: $yellow;\r\n    }\r\n\r\n    &__separator {\r\n        border: solid $yellow;\r\n    }\r\n\r\n    &__content {\r\n        margin-top: 32px;\r\n    }\r\n}",
-                    "styleUrl": "./default-page.component.scss"
+                    "data": ".error {\n    color: red;\n    align-items: baseline;\n\n    &__icon {\n        height: 14px;\n    }\n\n    &__message {\n        font-size: 14px;\n    }\n}",
+                    "styleUrl": "./error.component.scss"
                 }
             ],
             "stylesData": "",
-            "templateData": "<div class=\"page container\">\n    <h2 class=\"page__title\">{{title}}</h2>\n    <div class=\"page__separator\"></div>\n    <div class=\"page__content\">\n        <ng-content></ng-content>\n    </div>\n</div>"
+            "templateData": "<div *ngIf=\"control.touched && control.invalid\" class=\"error d-flex\">\n    <img src=\"assets/svg/error.svg\" alt=\"error\" class=\"error__icon\" />\n    <span class=\"error__message\">{{message}}</span>\n</div>"
         },
         {
-            "name": "HamburguerButtonComponent",
-            "id": "component-HamburguerButtonComponent-ee4bfbc588ccb8d7c69b70de685e582d",
-            "file": "src/app/core/header/hamburguer-button/hamburguer-button.component.ts",
+            "name": "HamburgerButtonComponent",
+            "id": "component-HamburgerButtonComponent-677d2730e17b3404969825efc462e86b",
+            "file": "src/app/core/header/hamburguer-button/hamburger-button.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
             "outputs": [],
             "providers": [],
-            "selector": "app-hamburguer-button",
+            "selector": "app-hamburger-button",
             "styleUrls": [
-                "./hamburguer-button.component.scss"
+                "./hamburger-button.component.scss"
             ],
             "styles": [],
             "templateUrl": [
-                "./hamburguer-button.component.html"
+                "./hamburger-button.component.html"
             ],
             "viewProviders": [],
             "inputsClass": [],
@@ -227,12 +364,12 @@
             "propertiesClass": [],
             "methodsClass": [
                 {
-                    "name": "ngOnInit",
+                    "name": "emitClick",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 12
+                    "line": 14
                 }
             ],
             "hostBindings": [],
@@ -240,29 +377,40 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-hamburguer-button',\n  templateUrl: './hamburguer-button.component.html',\n  styleUrls: ['./hamburguer-button.component.scss']\n})\nexport class HamburguerButtonComponent implements OnInit {\n\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\n\nimport { HamburgerButtonService } from './hamburger-button.service';\n\n@Component({\n  selector: 'app-hamburger-button',\n  templateUrl: './hamburger-button.component.html',\n  styleUrls: ['./hamburger-button.component.scss']\n})\nexport class HamburgerButtonComponent {\n\n  constructor(private hamburgerButtonService: HamburgerButtonService) { }\n\n  emitClick() {\n    this.hamburgerButtonService.emitClick();\n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@import \"/src/assets/variables\";\r\n\r\n.menu {\r\n    border: 0;\r\n    background-color: $navy-blue;\r\n}",
-                    "styleUrl": "./hamburguer-button.component.scss"
+                    "data": "@import \"/src/assets/variables\";\n\n.menu {\n    border: 0;\n    background-color: $navy-blue;\n}",
+                    "styleUrl": "./hamburger-button.component.scss"
                 }
             ],
             "stylesData": "",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
-                "args": [],
-                "line": 8
+                "args": [
+                    {
+                        "name": "hamburgerButtonService",
+                        "type": "HamburgerButtonService"
+                    }
+                ],
+                "line": 10,
+                "jsdoctags": [
+                    {
+                        "name": "hamburgerButtonService",
+                        "type": "HamburgerButtonService",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
             },
-            "implements": [
-                "OnInit"
-            ],
-            "templateData": "<button class=\"menu\">\n    <img src=\"/assets/svg/hamburger-menu.svg\" alt=\"menu\"/>\n</button>"
+            "templateData": "<button class=\"menu\" (click)=\"emitClick()\">\n    <img src=\"/assets/svg/hamburger-menu.svg\" alt=\"menu\"/>\n</button>"
         },
         {
             "name": "HeaderComponent",
-            "id": "component-HeaderComponent-246e2a69dc126a3bd76c6328dd3b93e2",
+            "id": "component-HeaderComponent-a68ad1da7809786c1e7f267abf58dc65",
             "file": "src/stories/header.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -274,14 +422,14 @@
                 "./header.css"
             ],
             "styles": [],
-            "template": "<header>    <div class=\"wrapper\">\n      <div>\n        <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n              fill=\"#FFF\"\n            />\n            <path\n              d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n              fill=\"#555AB9\"\n            />\n            <path\n              d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\"\n              fill=\"#91BAF8\"\n            />\n          </g>\n        </svg>\n        <h1>Acme</h1>\n      </div>\n      <div>\n        <storybook-button\n          *ngIf=\"user\"\n          size=\"small\"\n          (onClick)=\"onLogout.emit($event)\"\n          label=\"Log out\"\n        ></storybook-button>\n        <storybook-button\n          *ngIf=\"!user\"\n          size=\"small\"\n          (onClick)=\"onLogin.emit($event)\"\n          label=\"Log in\"\n        ></storybook-button>\n        <storybook-button\n          *ngIf=\"!user\"\n          primary\n          size=\"small\"\n          (onClick)=\"onCreateAccount.emit($event)\"\n          label=\"Sign up\"\n        ></storybook-button>\n      </div>\n    </div>\n  </header>",
+            "template": "<header>    <div class=\"wrapper\">\n      <div>\n        <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n              fill=\"#FFF\"\n            />\n            <path\n              d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n              fill=\"#555AB9\"\n            />\n            <path\n              d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\"\n              fill=\"#91BAF8\"\n            />\n          </g>\n        </svg>\n        <h1>Acme</h1>\n      </div>\n    </div>\n  </header>",
             "templateUrl": [],
             "viewProviders": [],
             "inputsClass": [
                 {
                     "name": "user",
                     "defaultValue": "null",
-                    "line": 53,
+                    "line": 32,
                     "type": "unknown"
                 }
             ],
@@ -289,19 +437,19 @@
                 {
                     "name": "onCreateAccount",
                     "defaultValue": "new EventEmitter<Event>()",
-                    "line": 62,
+                    "line": 41,
                     "type": "EventEmitter"
                 },
                 {
                     "name": "onLogin",
                     "defaultValue": "new EventEmitter<Event>()",
-                    "line": 56,
+                    "line": 35,
                     "type": "EventEmitter"
                 },
                 {
                     "name": "onLogout",
                     "defaultValue": "new EventEmitter<Event>()",
-                    "line": 59,
+                    "line": 38,
                     "type": "EventEmitter"
                 }
             ],
@@ -312,7 +460,7 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\n\n@Component({\n  selector: 'storybook-header',\n  template: `<header>\n    <div class=\"wrapper\">\n      <div>\n        <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n              fill=\"#FFF\"\n            />\n            <path\n              d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n              fill=\"#555AB9\"\n            />\n            <path\n              d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\"\n              fill=\"#91BAF8\"\n            />\n          </g>\n        </svg>\n        <h1>Acme</h1>\n      </div>\n      <div>\n        <storybook-button\n          *ngIf=\"user\"\n          size=\"small\"\n          (onClick)=\"onLogout.emit($event)\"\n          label=\"Log out\"\n        ></storybook-button>\n        <storybook-button\n          *ngIf=\"!user\"\n          size=\"small\"\n          (onClick)=\"onLogin.emit($event)\"\n          label=\"Log in\"\n        ></storybook-button>\n        <storybook-button\n          *ngIf=\"!user\"\n          primary\n          size=\"small\"\n          (onClick)=\"onCreateAccount.emit($event)\"\n          label=\"Sign up\"\n        ></storybook-button>\n      </div>\n    </div>\n  </header>`,\n  styleUrls: ['./header.css'],\n})\nexport default class HeaderComponent {\n  @Input()\n  user: unknown = null;\n\n  @Output()\n  onLogin = new EventEmitter<Event>();\n\n  @Output()\n  onLogout = new EventEmitter<Event>();\n\n  @Output()\n  onCreateAccount = new EventEmitter<Event>();\n}\n",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\n\n@Component({\n  selector: 'storybook-header',\n  template: `<header>\n    <div class=\"wrapper\">\n      <div>\n        <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n              fill=\"#FFF\"\n            />\n            <path\n              d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n              fill=\"#555AB9\"\n            />\n            <path\n              d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\"\n              fill=\"#91BAF8\"\n            />\n          </g>\n        </svg>\n        <h1>Acme</h1>\n      </div>\n    </div>\n  </header>`,\n  styleUrls: ['./header.css'],\n})\nexport default class HeaderComponent {\n  @Input()\n  user: unknown = null;\n\n  @Output()\n  onLogin = new EventEmitter<Event>();\n\n  @Output()\n  onLogout = new EventEmitter<Event>();\n\n  @Output()\n  onCreateAccount = new EventEmitter<Event>();\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -324,7 +472,7 @@
         },
         {
             "name": "HeaderComponent",
-            "id": "component-HeaderComponent-e41aded7dce8dcc9f3904c316e7fb138-1",
+            "id": "component-HeaderComponent-2b83331db3eaaf641e8835029544c09f-1",
             "file": "src/app/core/header/header.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -345,6 +493,76 @@
             "propertiesClass": [],
             "methodsClass": [
                 {
+                    "name": "closeMenu",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 14
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\n\nimport { HamburgerButtonService } from './hamburguer-button/hamburger-button.service';\n\n@Component({\n  selector: 'app-header',\n  templateUrl: './header.component.html',\n  styleUrls: ['./header.component.scss']\n})\nexport class HeaderComponent {\n\n  constructor(private hamburgerButtonService: HamburgerButtonService) { }\n\n  closeMenu() {\n    this.hamburgerButtonService.closeMenu();\n  }\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "@import \"/src/assets/variables\";\n\n.header {\n    background-color: $navy-blue;\n    align-items: center;\n    justify-content: space-evenly;\n\n    a {\n        color: $white;\n        text-align: center;\n        font-size: 2.5em;\n        font-family: Arial, Helvetica, sans-serif;\n        margin: 0;\n\n        &:hover {\n            text-decoration: none;\n        }\n    }\n}\n\n@media (min-width: $mobile-width) {\n    .header__menu {\n        display: none;\n    }\n}\n",
+                    "styleUrl": "./header.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [
+                    {
+                        "name": "hamburgerButtonService",
+                        "type": "HamburgerButtonService"
+                    }
+                ],
+                "line": 10,
+                "jsdoctags": [
+                    {
+                        "name": "hamburgerButtonService",
+                        "type": "HamburgerButtonService",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "isDuplicate": true,
+            "duplicateId": 1,
+            "duplicateName": "HeaderComponent-1",
+            "templateData": "<div class=\"header row d-flex justify-content-evenly m-0\">\n    <app-hamburger-button class=\"header__menu\"></app-hamburger-button>\n    <a [routerLink]=\"['/']\" (click)=\"closeMenu()\">Component Lib</a>\n</div>"
+        },
+        {
+            "name": "HomeComponent",
+            "id": "component-HomeComponent-0368ba31f32dcbd90cb54a0bd661b89c",
+            "file": "src/app/pages/home/home.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-home",
+            "styleUrls": [
+                "./home.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./home.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
                     "name": "ngOnInit",
                     "args": [],
                     "optional": false,
@@ -358,12 +576,12 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-header',\n  templateUrl: './header.component.html',\n  styleUrls: ['./header.component.scss']\n})\nexport class HeaderComponent implements OnInit {\n\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-home',\n  templateUrl: './home.component.html',\n  styleUrls: ['./home.component.scss']\n})\nexport class HomeComponent implements OnInit {\n\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@import \"/src/assets/variables\";\r\n\r\n.header {\r\n    background-color: $navy-blue;\r\n    align-items: center;\r\n    justify-content: space-evenly;\r\n\r\n    p {\r\n        color: $white;\r\n        text-align: center;\r\n        font-size: 2.5em;\r\n        font-family: Arial, Helvetica, sans-serif;\r\n        margin: 0;\r\n    }\r\n}\r\n\r\n@media (min-width: $mobile-width) {\r\n    .header__menu {\r\n        display: none;\r\n    }\r\n}\r\n",
-                    "styleUrl": "./header.component.scss"
+                    "data": "@import \"/src/assets/variables\";\n\n.home {\n\n    margin: 32px;\n\n    &__title {\n        color: $yellow;\n        margin-bottom: 32px;\n    }\n\n    a {\n        color: $navy-blue;\n        text-decoration: underline;\n    }\n}\n",
+                    "styleUrl": "./home.component.scss"
                 }
             ],
             "stylesData": "",
@@ -376,14 +594,11 @@
             "implements": [
                 "OnInit"
             ],
-            "isDuplicate": true,
-            "duplicateId": 1,
-            "duplicateName": "HeaderComponent-1",
-            "templateData": "<div class=\"header row d-flex justify-content-evenly m-0\">\n    <app-hamburguer-button class=\"header__menu\"></app-hamburguer-button>\n    <p>Component Lib</p>\n</div>"
+            "templateData": "<div class=\"home\">\n    <h2 class=\"home__title\">About the project</h2>\n    <p>This project is a component library, created to study the Storybook tool.</p>\n    <p>See the Storybook documentation <a href=\"https://storybook.js.org/\">here</a>.</p>\n</div>\n"
         },
         {
             "name": "InputComponent",
-            "id": "component-InputComponent-a474c8e62dfd61c1cd7c2b507c778d90",
+            "id": "component-InputComponent-85c96188372982e39d02d7a792f3ba02",
             "file": "src/app/components/input/input.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -412,7 +627,7 @@
                     "line": 14
                 },
                 {
-                    "name": "error",
+                    "name": "errors",
                     "defaultValue": "[]",
                     "line": 16,
                     "type": "Array<string>"
@@ -469,11 +684,11 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';\nimport { FormControl } from '@angular/forms';\n\n@Component({\n  selector: 'app-input',\n  templateUrl: './input.component.html',\n  styleUrls: ['./input.component.scss']\n})\nexport class InputComponent implements OnChanges {\n\n  @Input() type = 'text';\n  @Input() label = '';\n  @Input() id = 'input';\n  @Input() disabled = false;\n  @Input() mask = '';\n  @Input() error: Array<string> = [];\n  @Input() control = new FormControl({value: null});\n\n  ngOnChanges(change: SimpleChanges) {\n    if (change.disabled?.currentValue) {\n      this.control.disable();\n    } else if (change.disabled?.currentValue === false) {\n      this.control.enable();\n    }\n  }\n\n}\n",
+            "sourceCode": "import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';\nimport { FormControl } from '@angular/forms';\n\n@Component({\n  selector: 'app-input',\n  templateUrl: './input.component.html',\n  styleUrls: ['./input.component.scss']\n})\nexport class InputComponent implements OnChanges {\n\n  @Input() type = 'text';\n  @Input() label = '';\n  @Input() id = 'input';\n  @Input() disabled = false;\n  @Input() mask = '';\n  @Input() errors: Array<string> = [];\n  @Input() control = new FormControl({value: null});\n\n  ngOnChanges(change: SimpleChanges) {\n    if (change.disabled?.currentValue) {\n      this.control.disable();\n    } else if (change.disabled?.currentValue === false) {\n      this.control.enable();\n    }\n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@import \"/src/assets/variables\";\r\n\r\n.input {\r\n    &__field {\r\n        border: solid 1px;\r\n        border-radius: 7px;\r\n\r\n        &:focus {\r\n            outline: none;\r\n        }\r\n    }\r\n\r\n    &__error {\r\n        color: red;\r\n    }\r\n}\r\n\r\n.disabled {\r\n    background-color: $light-gray;\r\n}",
+                    "data": "@import \"/src/assets/variables\";\n\n.input {\n    &__field {\n        border: solid 1px;\n        border-radius: 7px;\n\n        &:focus {\n            outline: none;\n        }\n    }\n}\n\n.disabled {\n    background-color: $light-gray;\n}",
                     "styleUrl": "./input.component.scss"
                 }
             ],
@@ -481,11 +696,11 @@
             "implements": [
                 "OnChanges"
             ],
-            "templateData": "<div class=\"input d-flex flex-column\">\r\n    <label [for]=\"id\">{{label}}</label>\r\n    <input\r\n        [type]=\"type\"\r\n        [id]=\"id\"\r\n        class=\"input__field\"\r\n        [ngClass]=\"{disabled: disabled}\"\r\n        \r\n        \r\n        \r\n    />\r\n    <div *ngIf=\"control.touched && control.invalid\" class=\"input__error d-flex\">\r\n        <img src=\"assets/svg/error.svg\" alt=\"error\" />\r\n        <span>{{error[0]}}</span>\r\n    </div> -->\r\n    <!--\r\n        [formControl]=\"control\"\r\n        [mask]=\"mask\"-->\r\n        \r\n    \r\n</div>"
+            "templateData": "<div class=\"input d-flex flex-column\">\n    <label [for]=\"id\">{{label}}</label>\n    <input\n        [type]=\"type\"\n        [id]=\"id\"\n        class=\"input__field\"\n        [mask]=\"mask\"\n        [formControl]=\"control\"\n        [ngClass]=\"{disabled: disabled}\"\n    />\n    <app-error [message]=\"errors[0]\" [control]=\"control\"></app-error>\n</div>"
         },
         {
             "name": "InputPageComponent",
-            "id": "component-InputPageComponent-0390dd66fea4748a6525633800e83ac4",
+            "id": "component-InputPageComponent-b7d1749ecebb3a2919f1883c46595c62",
             "file": "src/app/pages/input-page/input-page.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -493,9 +708,7 @@
             "outputs": [],
             "providers": [],
             "selector": "app-input-page",
-            "styleUrls": [
-                "./input-page.component.scss"
-            ],
+            "styleUrls": [],
             "styles": [],
             "templateUrl": [
                 "./input-page.component.html"
@@ -505,12 +718,20 @@
             "outputsClass": [],
             "propertiesClass": [
                 {
+                    "name": "code",
+                    "defaultValue": "`<app-input label=\"Input field\" id=\"simple-input\" [disabled]=\"false\" [errors]=\"errors\" [control]=\"control\"></app-input>`",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 30
+                },
+                {
                     "name": "control",
                     "defaultValue": "new FormControl(null, [Validators.required, Validators.maxLength(10)])",
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 29
+                    "line": 28
                 }
             ],
             "methodsClass": [],
@@ -519,14 +740,9 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { FormControl, Validators } from '@angular/forms';\n\ninterface IErrors {\n  required: string;\n  maxlength: string;\n}\n\n@Component({\n  selector: 'app-input-page',\n  templateUrl: './input-page.component.html',\n  styleUrls: ['./input-page.component.scss']\n})\nexport class InputPageComponent {\n\n  get errors(): string[] {\n    const errorMessages: IErrors = {\n      required: 'Please fill in the field',\n      maxlength: 'The value exceeds the allowed number of characters'\n    };\n \n    if (this.control.errors !== null) {\n      return Object.keys(this.control.errors).map((error) => errorMessages[error as keyof IErrors]);\n    }\n\n    return [];\n  }\n\n  control = new FormControl(null, [Validators.required, Validators.maxLength(10)]);\n\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { FormControl, Validators } from '@angular/forms';\n\ninterface IErrors {\n  required: string;\n  maxlength: string;\n}\n\n@Component({\n  selector: 'app-input-page',\n  templateUrl: './input-page.component.html'\n})\nexport class InputPageComponent {\n\n  get errors(): string[] {\n    const errorMessages: IErrors = {\n      required: 'Please fill in the field',\n      maxlength: 'The value exceeds the allowed number of characters'\n    };\n \n    if (this.control.errors !== null) {\n      return Object.keys(this.control.errors).map((error) => errorMessages[error as keyof IErrors]);\n    }\n\n    return [];\n  }\n\n  control = new FormControl(null, [Validators.required, Validators.maxLength(10)]);\n\n  code = `<app-input label=\"Input field\" id=\"simple-input\" [disabled]=\"false\" [errors]=\"errors\" [control]=\"control\"></app-input>`;\n\n}\n",
             "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": "",
-                    "styleUrl": "./input-page.component.scss"
-                }
-            ],
+            "styleUrlsData": "",
             "stylesData": "",
             "accessors": {
                 "errors": {
@@ -535,11 +751,11 @@
                         "name": "errors",
                         "type": "[]",
                         "returnType": "string[]",
-                        "line": 16
+                        "line": 15
                     }
                 }
             },
-            "templateData": "<app-default-page [title]=\"'Input'\">\n    <app-input label=\"Simple Input\" id=\"simple-input\" [disabled]=\"false\"></app-input>\n    <app-input label=\"Disabled Input\" id=\"disabled-input\" [disabled]=\"true\"></app-input>\n    <app-input label=\"Input With Mask\" id=\"mask-input\" [mask]=\"'(00) 00000-0000'\"></app-input>\n    <app-input label=\"Error Input\" id=\"error-input\" [error]=\"errors\" [control]=\"control\"></app-input>\n</app-default-page>"
+            "templateData": "<app-default-page [title]=\"'Input'\" [code]=\"code\">\n    <app-input\n        label=\"Input field\"\n        id=\"simple-input\"\n        [disabled]=\"false\"\n        [errors]=\"errors\"\n        [control]=\"control\"\n    >\n    </app-input>\n</app-default-page>"
         },
         {
             "name": "PageComponent",
@@ -604,8 +820,171 @@
             "stylesData": ""
         },
         {
+            "name": "SelectComponent",
+            "id": "component-SelectComponent-70e55c6e1fbf0ab3da236cd6c1aed4f4",
+            "file": "src/app/components/select/select.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-select",
+            "styleUrls": [
+                "./select.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./select.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "control",
+                    "defaultValue": "new FormControl({value: null})",
+                    "line": 20,
+                    "type": "FormControl"
+                },
+                {
+                    "name": "disabled",
+                    "defaultValue": "false",
+                    "line": 19
+                },
+                {
+                    "name": "error",
+                    "defaultValue": "''",
+                    "line": 21
+                },
+                {
+                    "name": "id",
+                    "defaultValue": "''",
+                    "line": 18
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "''",
+                    "line": 17
+                },
+                {
+                    "name": "options",
+                    "defaultValue": "[{\n    value: '',\n    viewValue: ''\n  }]",
+                    "line": 13,
+                    "type": "Options"
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnChanges",
+                    "args": [
+                        {
+                            "name": "change",
+                            "type": "SimpleChanges"
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 23,
+                    "jsdoctags": [
+                        {
+                            "name": "change",
+                            "type": "SimpleChanges",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';\nimport { FormControl } from '@angular/forms';\n\nimport { Options } from '../../core/types/select.type';\n\n@Component({\n  selector: 'app-select',\n  templateUrl: './select.component.html',\n  styleUrls: ['./select.component.scss']\n})\nexport class SelectComponent implements OnChanges {\n\n  @Input() options: Options = [{\n    value: '',\n    viewValue: ''\n  }];\n  @Input() label = '';\n  @Input() id = '';\n  @Input() disabled = false;\n  @Input() control = new FormControl({value: null});\n  @Input() error = '';\n\n  ngOnChanges(change: SimpleChanges) {\n    if (change.disabled?.currentValue) {\n      this.control.disable();\n    } else if (change.disabled?.currentValue === false) {\n      this.control.enable();\n    }\n  }\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "@import \"/src/assets/variables\";\n\n.select {\n    &__field {\n        background-color: $white;\n        border: solid 1px;\n        border-radius: 7px;\n        height: 28px;\n\n        &:focus {\n            outline: none;\n        }\n    }\n\n    &__option {\n        &:checked {\n            background-color: $navy-blue;\n            color: $yellow;\n        }\n    }\n}\n\n.disabled {\n    background-color: $light-gray;\n}\n",
+                    "styleUrl": "./select.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "implements": [
+                "OnChanges"
+            ],
+            "templateData": "<div class=\"select input d-flex flex-column\">\n    <label [for]=\"id\">{{label}}</label>\n    <select class=\"select__field\" [ngClass]=\"{disabled: disabled}\" [formControl]=\"control\">\n        <option></option>\n        <option *ngFor=\"let opt of options\" value=\"opt.value\" class=\"select__option\">{{ opt.viewValue }}</option>\n    </select>\n    <app-error [message]=\"error\" [control]=\"control\"></app-error>\n</div>"
+        },
+        {
+            "name": "SelectPageComponent",
+            "id": "component-SelectPageComponent-219e606234f2eff4159a70ef6c352a00",
+            "file": "src/app/pages/select-page/select-page.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-select-page",
+            "styleUrls": [
+                "./select-page.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./select-page.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "control",
+                    "defaultValue": "new FormControl(null, [Validators.required])",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 26
+                },
+                {
+                    "name": "error",
+                    "defaultValue": "'Please fill in the field'",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 28,
+                    "modifierKind": [
+                        132
+                    ]
+                },
+                {
+                    "name": "options",
+                    "defaultValue": "[\n    {\n      value: 'option1',\n      viewValue: 'Option 1'\n    },\n    {\n      value: 'option2',\n      viewValue: 'Option 2'\n    },\n    {\n      value: 'option3',\n      viewValue: 'Option 3'\n    }\n  ]",
+                    "type": "[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 11
+                }
+            ],
+            "methodsClass": [],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { FormControl, Validators } from '@angular/forms';\n\n@Component({\n  selector: 'app-select-page',\n  templateUrl: './select-page.component.html',\n  styleUrls: ['./select-page.component.scss']\n})\nexport class SelectPageComponent {\n\n  options = [\n    {\n      value: 'option1',\n      viewValue: 'Option 1'\n    },\n    {\n      value: 'option2',\n      viewValue: 'Option 2'\n    },\n    {\n      value: 'option3',\n      viewValue: 'Option 3'\n    }\n  ];\n\n  control = new FormControl(null, [Validators.required]);\n\n  readonly error = 'Please fill in the field';\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./select-page.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "templateData": "<app-default-page [title]=\"'Select'\">\n    <app-select\n        [options]=\"options\"\n        [label]=\"'Select'\"\n        [id]=\"'select'\"\n        [control]=\"control\"\n        [error]=\"error\"\n    >\n    </app-select>\n</app-default-page>"
+        },
+        {
             "name": "SidebarMenuComponent",
-            "id": "component-SidebarMenuComponent-abb5022c8b9d1f664826c837583b49f0",
+            "id": "component-SidebarMenuComponent-5068fe1dd4f8aa7ae6b0e4491b262fdc",
             "file": "src/app/core/sidebar-menu/sidebar-menu.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -623,15 +1002,24 @@
             "viewProviders": [],
             "inputsClass": [],
             "outputsClass": [],
-            "propertiesClass": [],
+            "propertiesClass": [
+                {
+                    "name": "menuItems",
+                    "defaultValue": "[\n    {\n      name: 'Input',\n      url: '/input'\n    },\n    {\n      name: 'Select',\n      url: '/select'\n    }\n  ]",
+                    "type": "[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 12
+                }
+            ],
             "methodsClass": [
                 {
-                    "name": "ngOnInit",
+                    "name": "closeMenu",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 12
+                    "line": 25
                 }
             ],
             "hostBindings": [],
@@ -639,11 +1027,11 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-sidebar-menu',\n  templateUrl: './sidebar-menu.component.html',\n  styleUrls: ['./sidebar-menu.component.scss']\n})\nexport class SidebarMenuComponent implements OnInit {\n\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\n\nimport { HamburgerButtonService } from '../header/hamburguer-button/hamburger-button.service';\n\n@Component({\n  selector: 'app-sidebar-menu',\n  templateUrl: './sidebar-menu.component.html',\n  styleUrls: ['./sidebar-menu.component.scss']\n})\nexport class SidebarMenuComponent {\n\n  menuItems = [\n    {\n      name: 'Input',\n      url: '/input'\n    },\n    {\n      name: 'Select',\n      url: '/select'\n    }\n  ];\n\n  constructor(private hamburgerButtonService: HamburgerButtonService) { }\n\n  closeMenu() {\n    this.hamburgerButtonService.emitClick();\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@import \"/src/assets/variables\";\r\n\r\n.menu {\r\n    min-width: 175px;\r\n    max-width: 250px;\r\n    height: 100%;\r\n    border: solid 1px;\r\n\r\n    &__list {\r\n        padding-left: 0;\r\n    }\r\n\r\n    &__item {\r\n       list-style-type: none;\r\n       border-bottom: 1px solid;\r\n       font-size: 30px;\r\n       padding-left: 2px;\r\n\r\n       &:hover {\r\n           background-color: $dark-gray;\r\n       }\r\n    }\r\n\r\n    &__item--active {\r\n        background-color: $navy-blue;\r\n\r\n        .menu__link {\r\n            color: $yellow;\r\n        }\r\n\r\n        &:hover {\r\n            background-color: $navy-blue;\r\n        }\r\n    }\r\n}\r\n\r\n@media (min-width: $mobile-width) {\r\n    .menu__item {\r\n        font-size: 1rem;\r\n    }\r\n}",
+                    "data": "@import \"/src/assets/variables\";\n\n.menu {\n    height: 100%;\n    border: solid 1px;\n    background-color: $white;\n\n    &__list {\n        padding-left: 0;\n    }\n\n    &__item {\n       list-style-type: none;\n       border-bottom: 1px solid;\n       font-size: 30px;\n       padding-left: 2px;\n\n       .menu__link {\n           display: block;\n       }\n\n       &:hover {\n           background-color: $dark-gray;\n       }\n    }\n\n    &__item--active {\n        background-color: $navy-blue;\n\n        .menu__link {\n            color: $yellow;\n        }\n\n        &:hover {\n            background-color: $navy-blue;\n        }\n    }\n\n    &__link {\n        color: $navy-blue;\n        &:hover {\n            text-decoration: none;\n        }\n    }\n}\n\n@media (min-width: $mobile-width) {\n    .menu__item {\n        font-size: 1rem;\n    }\n}\n",
                     "styleUrl": "./sidebar-menu.component.scss"
                 }
             ],
@@ -651,13 +1039,24 @@
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
-                "args": [],
-                "line": 8
+                "args": [
+                    {
+                        "name": "hamburgerButtonService",
+                        "type": "HamburgerButtonService"
+                    }
+                ],
+                "line": 21,
+                "jsdoctags": [
+                    {
+                        "name": "hamburgerButtonService",
+                        "type": "HamburgerButtonService",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
             },
-            "implements": [
-                "OnInit"
-            ],
-            "templateData": "<aside class=\"menu\">\n    <nav>\n        <ul class=\"menu__list\">\n            <li class=\"menu__item\" [routerLinkActive]=\"'menu__item--active'\">\n                <a [routerLink]=\"['/input']\" class=\"menu__link\">Input</a>\n            </li>\n            <li class=\"menu__item\">Select</li>\n        </ul>\n    </nav>\n</aside>"
+            "templateData": "<aside class=\"menu\">\n    <nav>\n        <ul class=\"menu__list\">\n            <li class=\"menu__item\" [routerLinkActive]=\"'menu__item--active'\" *ngFor=\"let item of menuItems\">\n                <a [routerLink]=\"[item.url]\" class=\"menu__link\" (click)=\"closeMenu()\">{{item.name}}</a>\n            </li>\n        </ul>\n    </nav>\n</aside>"
         }
     ],
     "modules": [
@@ -673,6 +1072,9 @@
                     "elements": [
                         {
                             "name": "AppComponent"
+                        },
+                        {
+                            "name": "HomeComponent"
                         }
                     ]
                 },
@@ -687,6 +1089,9 @@
                         },
                         {
                             "name": "InputPageModule"
+                        },
+                        {
+                            "name": "SelectPageModule"
                         },
                         {
                             "name": "SidebarMenuModule"
@@ -778,7 +1183,7 @@
             ]
         },
         {
-            "name": "HeaderModule",
+            "name": "ErrorModule",
             "children": [
                 {
                     "type": "providers",
@@ -788,7 +1193,7 @@
                     "type": "declarations",
                     "elements": [
                         {
-                            "name": "HamburguerButtonComponent"
+                            "name": "ErrorComponent"
                         }
                     ]
                 },
@@ -800,7 +1205,44 @@
                     "type": "exports",
                     "elements": [
                         {
-                            "name": "HamburguerButtonComponent"
+                            "name": "ErrorComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "HeaderModule",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "HamburgerButtonComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "HamburgerButtonComponent"
                         }
                     ]
                 },
@@ -831,7 +1273,11 @@
                 },
                 {
                     "type": "imports",
-                    "elements": []
+                    "elements": [
+                        {
+                            "name": "ErrorModule"
+                        }
+                    ]
                 },
                 {
                     "type": "exports",
@@ -874,6 +1320,87 @@
                         },
                         {
                             "name": "InputModule"
+                        }
+                    ]
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "SelectModule",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "SelectComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": [
+                        {
+                            "name": "ErrorModule"
+                        }
+                    ]
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "SelectComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "SelectPageModule",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "SelectPageComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": [
+                        {
+                            "name": "DefaultPageModule"
+                        },
+                        {
+                            "name": "SelectModule"
                         }
                     ]
                 },
@@ -937,7 +1464,7 @@
                 "subtype": "variable",
                 "file": "src/app/core/header/header.module.ts",
                 "type": "[]",
-                "defaultValue": "[HeaderComponent, HamburguerButtonComponent]"
+                "defaultValue": "[HeaderComponent, HamburgerButtonComponent]"
             },
             {
                 "name": "context",
@@ -948,10 +1475,34 @@
                 "defaultValue": "require.context('./', true, /\\.spec\\.ts$/)"
             },
             {
+                "name": "Disabled",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/input.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Disabled",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/select.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
                 "name": "Enabled",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/components/input/input.stories.ts",
+                "file": "src/stories/input.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Enabled",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/select.stories.ts",
                 "type": "",
                 "defaultValue": "Template.bind({})"
             },
@@ -972,10 +1523,10 @@
                 "defaultValue": "{\n  production: false\n}"
             },
             {
-                "name": "Large",
+                "name": "Error",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/Button.stories.ts",
+                "file": "src/stories/input.stories.ts",
                 "type": "",
                 "defaultValue": "Template.bind({})"
             },
@@ -1012,12 +1563,20 @@
                 "defaultValue": "Template.bind({})"
             },
             {
-                "name": "Primary",
+                "name": "Masked",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/Button.stories.ts",
+                "file": "src/stories/input.stories.ts",
                 "type": "",
                 "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "options",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/select.stories.ts",
+                "type": "[]",
+                "defaultValue": "[\n    {\n        value: 'option1',\n        viewValue: 'Option 1'\n    },\n    {\n        value: 'option2',\n        viewValue: 'Option 2'\n    }\n]"
             },
             {
                 "name": "require",
@@ -1025,30 +1584,6 @@
                 "subtype": "variable",
                 "file": "src/test.ts",
                 "type": "literal type"
-            },
-            {
-                "name": "Secondary",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Button.stories.ts",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "Small",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Button.stories.ts",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Button.stories.ts",
-                "type": "Story<Button>",
-                "defaultValue": "(args: Button) => ({\n  props: args,\n})"
             },
             {
                 "name": "Template",
@@ -1070,13 +1605,40 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/components/input/input.stories.ts",
+                "file": "src/stories/input.stories.ts",
                 "type": "Story<InputComponent>",
-                "defaultValue": "(args: InputComponent) => ({\r\n  props: args,\r\n})"
+                "defaultValue": "(args: InputComponent) => ({\n  props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/select.stories.ts",
+                "type": "Story<SelectComponent>",
+                "defaultValue": "(args: SelectComponent) => ({\n  props: args,\n})"
             }
         ],
         "functions": [],
-        "typealiases": [],
+        "typealiases": [
+            {
+                "name": "Option",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "literal type",
+                "file": "src/app/core/types/select.type.ts",
+                "description": "",
+                "kind": 165
+            },
+            {
+                "name": "Options",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "Array<Option>",
+                "file": "src/app/core/types/select.type.ts",
+                "description": "",
+                "kind": 161
+            }
+        ],
         "enumerations": [],
         "groupedVariables": {
             "src/app/core/header/header.module.ts": [
@@ -1086,7 +1648,7 @@
                     "subtype": "variable",
                     "file": "src/app/core/header/header.module.ts",
                     "type": "[]",
-                    "defaultValue": "[HeaderComponent, HamburguerButtonComponent]"
+                    "defaultValue": "[HeaderComponent, HamburgerButtonComponent]"
                 }
             ],
             "src/test.ts": [
@@ -1106,12 +1668,36 @@
                     "type": "literal type"
                 }
             ],
-            "src/app/components/input/input.stories.ts": [
+            "src/stories/input.stories.ts": [
+                {
+                    "name": "Disabled",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/input.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
                 {
                     "name": "Enabled",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/app/components/input/input.stories.ts",
+                    "file": "src/stories/input.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Error",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/input.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Masked",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/input.stories.ts",
                     "type": "",
                     "defaultValue": "Template.bind({})"
                 },
@@ -1119,9 +1705,43 @@
                     "name": "Template",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/app/components/input/input.stories.ts",
+                    "file": "src/stories/input.stories.ts",
                     "type": "Story<InputComponent>",
-                    "defaultValue": "(args: InputComponent) => ({\r\n  props: args,\r\n})"
+                    "defaultValue": "(args: InputComponent) => ({\n  props: args,\n})"
+                }
+            ],
+            "src/stories/select.stories.ts": [
+                {
+                    "name": "Disabled",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/select.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Enabled",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/select.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "options",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/select.stories.ts",
+                    "type": "[]",
+                    "defaultValue": "[\n    {\n        value: 'option1',\n        viewValue: 'Option 1'\n    },\n    {\n        value: 'option2',\n        viewValue: 'Option 2'\n    }\n]"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/select.stories.ts",
+                    "type": "Story<SelectComponent>",
+                    "defaultValue": "(args: SelectComponent) => ({\n  props: args,\n})"
                 }
             ],
             "src/environments/environment.prod.ts": [
@@ -1142,48 +1762,6 @@
                     "file": "src/environments/environment.ts",
                     "type": "object",
                     "defaultValue": "{\n  production: false\n}"
-                }
-            ],
-            "src/stories/Button.stories.ts": [
-                {
-                    "name": "Large",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Button.stories.ts",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Primary",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Button.stories.ts",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Secondary",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Button.stories.ts",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Small",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Button.stories.ts",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Button.stories.ts",
-                    "type": "Story<Button>",
-                    "defaultValue": "(args: Button) => ({\n  props: args,\n})"
                 }
             ],
             "src/stories/Header.stories.ts": [
@@ -1241,7 +1819,28 @@
         },
         "groupedFunctions": {},
         "groupedEnumerations": {},
-        "groupedTypeAliases": {}
+        "groupedTypeAliases": {
+            "src/app/core/types/select.type.ts": [
+                {
+                    "name": "Option",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "literal type",
+                    "file": "src/app/core/types/select.type.ts",
+                    "description": "",
+                    "kind": 165
+                },
+                {
+                    "name": "Options",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "Array<Option>",
+                    "file": "src/app/core/types/select.type.ts",
+                    "description": "",
+                    "kind": 161
+                }
+            ]
+        }
     },
     "routes": {
         "name": "<root>",
@@ -1258,8 +1857,12 @@
                         "component": "InputPageComponent"
                     },
                     {
+                        "path": "select",
+                        "component": "SelectPageComponent"
+                    },
+                    {
                         "path": "",
-                        "component": "InputPageComponent"
+                        "component": "HomeComponent"
                     }
                 ],
                 "kind": "module"
@@ -1267,7 +1870,7 @@
         ]
     },
     "coverage": {
-        "count": 2,
+        "count": 0,
         "status": "low",
         "files": [
             {
@@ -1276,7 +1879,16 @@
                 "linktype": "component",
                 "name": "AppComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/2",
+                "coverageCount": "0/8",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/error/error.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ErrorComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
                 "status": "low"
             },
             {
@@ -1289,32 +1901,30 @@
                 "status": "low"
             },
             {
-                "filePath": "src/app/components/input/input.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Enabled",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/input/input.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Template",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/core/header/hamburguer-button/hamburguer-button.component.ts",
+                "filePath": "src/app/components/select/select.component.ts",
                 "type": "component",
                 "linktype": "component",
-                "name": "HamburguerButtonComponent",
+                "name": "SelectComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/8",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/core/header/hamburguer-button/hamburger-button.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "HamburgerButtonComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/core/header/hamburguer-button/hamburger-button.service.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "HamburgerButtonService",
+                "coveragePercent": 0,
+                "coverageCount": "0/8",
                 "status": "low"
             },
             {
@@ -1342,7 +1952,7 @@
                 "linktype": "component",
                 "name": "SidebarMenuComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/3",
+                "coverageCount": "0/4",
                 "status": "low"
             },
             {
@@ -1351,7 +1961,16 @@
                 "linktype": "component",
                 "name": "DefaultPageComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/2",
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/pages/home/home.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "HomeComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
                 "status": "low"
             },
             {
@@ -1360,7 +1979,7 @@
                 "linktype": "component",
                 "name": "InputPageComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/2",
+                "coverageCount": "0/3",
                 "status": "low"
             },
             {
@@ -1370,6 +1989,15 @@
                 "name": "IErrors",
                 "coveragePercent": 0,
                 "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/pages/select-page/select-page.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "SelectPageComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
                 "status": "low"
             },
             {
@@ -1393,56 +2021,6 @@
                 "status": "low"
             },
             {
-                "filePath": "src/stories/Button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Large",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Primary",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Secondary",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Small",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Template",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
                 "filePath": "src/stories/Header.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
@@ -1501,15 +2079,6 @@
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
-            },
-            {
-                "filePath": "src/stories/button.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "ButtonComponent",
-                "coveragePercent": 83,
-                "coverageCount": "5/6",
-                "status": "very-good"
             },
             {
                 "filePath": "src/stories/header.component.ts",
@@ -1521,12 +2090,102 @@
                 "status": "low"
             },
             {
+                "filePath": "src/stories/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Disabled",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Enabled",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Error",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Masked",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/input.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
                 "filePath": "src/stories/page.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "PageComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/select.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Disabled",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/select.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Enabled",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/select.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "options",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/select.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {

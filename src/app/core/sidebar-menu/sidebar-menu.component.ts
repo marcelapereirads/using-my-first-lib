@@ -13,6 +13,10 @@ export class SidebarMenuComponent {
     {
       name: 'Input',
       url: '/input'
+    },
+    {
+      name: 'Select',
+      url: '/select'
     }
   ];
 

@@ -23,27 +23,6 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
         </svg>
         <h1>Acme</h1>
       </div>
-      <div>
-        <storybook-button
-          *ngIf="user"
-          size="small"
-          (onClick)="onLogout.emit($event)"
-          label="Log out"
-        ></storybook-button>
-        <storybook-button
-          *ngIf="!user"
-          size="small"
-          (onClick)="onLogin.emit($event)"
-          label="Log in"
-        ></storybook-button>
-        <storybook-button
-          *ngIf="!user"
-          primary
-          size="small"
-          (onClick)="onCreateAccount.emit($event)"
-          label="Sign up"
-        ></storybook-button>
-      </div>
     </div>
   </header>`,
   styleUrls: ['./header.css'],

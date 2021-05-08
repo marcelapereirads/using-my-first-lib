@@ -2,48 +2,52 @@ import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angu
 
 import { Story, Meta } from '@storybook/angular/types-6-0';
 import { moduleMetadata } from '@storybook/angular';
-import { NgxMaskModule } from 'ngx-mask';
 
-import { InputComponent } from './input.component';
+import { SelectComponent } from '../app/components/select/select.component';
+import { ErrorModule } from 'src/app/components/error/error.module';
 
 export default {
-  title: 'Example/Input',
-  component: InputComponent,
+  title: 'Components/Select',
+  component: SelectComponent,
   decorators: [
     moduleMetadata({
       imports: [
-        NgxMaskModule.forRoot(),
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        ErrorModule
       ],
     }),
   ],
 } as Meta;
 
-const Template: Story<InputComponent> = (args: InputComponent) => ({
+const Template: Story<SelectComponent> = (args: SelectComponent) => ({
   props: args,
 });
 
+const options = [
+    {
+        value: 'option1',
+        viewValue: 'Option 1'
+    },
+    {
+        value: 'option2',
+        viewValue: 'Option 2'
+    }
+];
+
 export const Enabled = Template.bind({});
 Enabled.args = {
-  label: 'Input',
-  id: 'enabled-input',
+  label: 'Select',
+  id: 'enabled-select',
+  options,
   control: new FormControl()
 };
 
 export const Disabled = Template.bind({});
 Disabled.args = {
-  label: 'Input',
-  id: 'disabled-input',
+  label: 'Select',
+  id: 'disabled-select',
   disabled: true,
-  control: new FormControl()
-};
-
-export const Masked = Template.bind({});
-Masked.args = {
-  label: 'Input',
-  id: 'masked-input',
-  mask: '(00) 00000-0000',
   control: new FormControl()
 };
 
@@ -51,6 +55,7 @@ export const Error = Template.bind({});
 Error.args = {
   label: 'Input',
   id: 'error-input',
-  errors: ['Please fill in the field'],
+  options,
+  error: 'Please fill in the field',
   control: new FormControl(null, [Validators.required])
 };

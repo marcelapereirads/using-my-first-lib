@@ -4,7 +4,6 @@
             <li class="menu__item" [routerLinkActive]="'menu__item--active'" *ngFor="let item of menuItems">
                 <a [routerLink]="[item.url]" class="menu__link" (click)="closeMenu()">{{item.name}}</a>
             </li>
-            <li class="menu__item">Select</li>
         </ul>
     </nav>
 </aside>
