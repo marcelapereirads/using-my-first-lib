@@ -8,8 +8,5 @@
         [formControl]="control"
         [ngClass]="{disabled: disabled}"
     />
-    <div *ngIf="control.touched && control.invalid" class="input__error d-flex">
-        <img src="assets/svg/error.svg" alt="error" />
-        <span>{{errors[0]}}</span>
-    </div>        
+    <app-error [message]="errors[0]" [control]="control"></app-error>
 </div>

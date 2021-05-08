@@ -1,0 +1,12 @@
+.error {
+    color: red;
+    align-items: baseline;
+
+    &__icon {
+        height: 14px;
+    }
+
+    &__message {
+        font-size: 14px;
+    }
+}

@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskModule } from 'ngx-mask'
 
 import { InputComponent } from './input.component';
+import { ErrorModule } from '../error/error.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { InputComponent } from './input.component';
     CommonModule,
     NgxMaskModule.forRoot(),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ErrorModule
   ],
   exports: [
     InputComponent

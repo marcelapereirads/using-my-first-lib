@@ -8,8 +8,7 @@ interface IErrors {
 
 @Component({
   selector: 'app-input-page',
-  templateUrl: './input-page.component.html',
-  styleUrls: ['./input-page.component.scss']
+  templateUrl: './input-page.component.html'
 })
 export class InputPageComponent {
 
