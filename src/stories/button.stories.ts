@@ -17,18 +17,22 @@ const Template: Story<ButtonComponent> = (args: ButtonComponent) => ({
   props: args,
 });
 
+const action = () => alert('clicked');
+
 export const Primary = Template.bind({});
 Primary.args = {
   text: 'Primary button',
   id: 'primary-button',
-  type: 'primary'
+  type: 'primary',
+  action
 };
 
 export const Secondary = Template.bind({});
 Secondary.args = {
   text: 'Secondary button',
   id: 'secondary-button',
-  type: 'secondary'
+  type: 'secondary',
+  action
 };
 
 export const Disabled = Template.bind({});
@@ -36,5 +40,6 @@ Disabled.args = {
   text: 'Disabled button',
   id: 'disabled-button',
   type: 'primary',
-  disabled: true
+  disabled: true,
+  action
 };

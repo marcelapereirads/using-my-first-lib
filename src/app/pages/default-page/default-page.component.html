@@ -8,8 +8,8 @@
         <div class="default__code" [ngClass]="{hide: showPreview}">
             {{code}}
         </div>
-        <div class="">
-            <button class="default__action" (click)="changeView()">
+        <div class="d-flex justify-content-end">
+            <button class="default__action" (click)="changeView()" [ngClass]="{code: !showPreview}">
                 <img src="assets/svg/code.svg" alt="code" />
             </button>
         </div>
