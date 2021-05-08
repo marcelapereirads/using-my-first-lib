@@ -1,6 +1,8 @@
 @import "/src/assets/variables";
 
 .default {
+    margin-top: 16px;
+
     &__title {
         color: $yellow;
     }

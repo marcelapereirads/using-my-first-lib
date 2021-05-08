@@ -2,7 +2,6 @@
 
 .menu {
     height: 100%;
-    border: solid 1px;
     background-color: $white;
 
     &__list {
@@ -11,7 +10,7 @@
 
     &__item {
        list-style-type: none;
-       border-bottom: 1px solid;
+       border-bottom: 1px solid $light-gray;
        font-size: 30px;
        padding-left: 2px;
 

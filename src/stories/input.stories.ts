@@ -1,7 +1,7 @@
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-
 import { Story, Meta } from '@storybook/angular/types-6-0';
 import { moduleMetadata } from '@storybook/angular';
+
 import { NgxMaskModule } from 'ngx-mask';
 
 import { InputComponent } from '../app/components/input/input.component';

@@ -17,6 +17,10 @@ export class SidebarMenuComponent {
     {
       name: 'Select',
       url: '/select'
+    },
+    {
+      name: 'Button',
+      url: '/button'
     }
   ];
 
