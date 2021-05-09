@@ -16,7 +16,7 @@ import { HomeComponent } from './pages/home/home.component';
     BrowserModule,
     AppRoutingModule,
     HeaderModule,
-    SidebarMenuModule,
+    SidebarMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

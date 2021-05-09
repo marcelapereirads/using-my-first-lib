@@ -1,9 +1,10 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+import { InputModule } from 'basic-component-library';
 
 import { DefaultPageModule } from '../default-page/default-page.module';
 import { InputPageComponent } from './input-page.component';
-import { InputModule } from 'src/app/components/input/input.module';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { InputModule } from 'src/app/components/input/input.module';
     CommonModule,
     DefaultPageModule,
     InputModule
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class InputPageModule { }

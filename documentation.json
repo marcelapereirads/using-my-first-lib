@@ -222,11 +222,11 @@
                 "OnInit",
                 "OnDestroy"
             ],
-            "templateData": "<div class=\"page\">\n    <app-header></app-header>\n    <div class=\"page__content\">\n        <div *ngIf=\"menuIsOpen\" class=\"page__shaddow\">\n            <div class=\"page__sidebar\">\n                <app-sidebar-menu></app-sidebar-menu>\n            </div>\n        </div>\n        <div class=\"page__main\">\n            <router-outlet></router-outlet>\n        </div>\n    </div>\n</div>"
+            "templateData": "<div class=\"page\">\n    <app-header></app-header>\n    <div class=\"page__content\">\n        <div *ngIf=\"menuIsOpen\" class=\"page__shaddow\">\n            <div class=\"page__sidebar\">\n                <app-sidebar-menu></app-sidebar-menu>\n            </div>\n        </div>\n        <div class=\"page__main\">\n            <router-outlet></router-outlet>\n        </div>\n    </div>\n</div>\n<lib-basic-component-library></lib-basic-component-library>"
         },
         {
             "name": "ButtonComponent",
-            "id": "component-ButtonComponent-f980f2309db56f61be371c6a0e8c0a82",
+            "id": "component-ButtonComponent-14951ec9b4d57ce95830144b2f1c396c",
             "file": "src/app/components/button/button.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -246,11 +246,16 @@
                 {
                     "name": "action",
                     "defaultValue": "() => {}",
-                    "line": 13
+                    "line": 14
                 },
                 {
                     "name": "disabled",
                     "defaultValue": "false",
+                    "line": 13
+                },
+                {
+                    "name": "id",
+                    "defaultValue": "''",
                     "line": 12
                 },
                 {
@@ -274,7 +279,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 15
+                    "line": 16
                 }
             ],
             "hostBindings": [],
@@ -282,7 +287,7 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\n\n@Component({\n  selector: 'app-button',\n  templateUrl: './button.component.html',\n  styleUrls: ['./button.component.scss']\n})\nexport class ButtonComponent {\n\n  @Input() text = 'Button';\n  @Input() type: 'primary' | 'secondary' = 'primary';\n  @Input() disabled = false;\n  @Input() action = () => {};\n\n  handleClick() {\n    if (!this.disabled) {\n      this.action();\n    }\n  }\n}\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\n\n@Component({\n  selector: 'app-button',\n  templateUrl: './button.component.html',\n  styleUrls: ['./button.component.scss']\n})\nexport class ButtonComponent {\n\n  @Input() text = 'Button';\n  @Input() type: 'primary' | 'secondary' = 'primary';\n  @Input() id = '';\n  @Input() disabled = false;\n  @Input() action = () => {};\n\n  handleClick() {\n    if (!this.disabled) {\n      this.action();\n    }\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -291,11 +296,11 @@
                 }
             ],
             "stylesData": "",
-            "templateData": "<button [class]=\"type\" (click)=\"handleClick()\" [ngClass]=\"{disabled: disabled}\">\n    {{text}}\n</button>"
+            "templateData": "<button [class]=\"type\" (click)=\"handleClick()\" [ngClass]=\"{disabled: disabled}\" id=\"id\">\n    {{text}}\n</button>"
         },
         {
             "name": "ButtonPageComponent",
-            "id": "component-ButtonPageComponent-c337e3d312e92a521e27b0057b8cd3d8",
+            "id": "component-ButtonPageComponent-57434d89e7c44b21ab113f08a8737e45",
             "file": "src/app/pages/button-page/button-page.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -313,12 +318,23 @@
             "outputsClass": [],
             "propertiesClass": [
                 {
+                    "name": "code",
+                    "defaultValue": "`<app-button type=\"primary\" [action]=\"showAlert\"></app-button>`",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 9,
+                    "modifierKind": [
+                        132
+                    ]
+                },
+                {
                     "name": "showAlert",
                     "defaultValue": "() => {...}",
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 9
+                    "line": 11
                 }
             ],
             "methodsClass": [],
@@ -327,11 +343,11 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component} from '@angular/core';\n\n@Component({\n  selector: 'app-button-page',\n  templateUrl: './button-page.component.html'\n})\nexport class ButtonPageComponent {\n\n  showAlert = () => {\n    alert('Clicked');\n  }\n\n}\n",
+            "sourceCode": "import { Component} from '@angular/core';\n\n@Component({\n  selector: 'app-button-page',\n  templateUrl: './button-page.component.html'\n})\nexport class ButtonPageComponent {\n\n  readonly code = `<app-button type=\"primary\" [action]=\"showAlert\"></app-button>`;\n\n  showAlert = () => {\n    alert('Clicked');\n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
-            "templateData": "<app-default-page [title]=\"'Button'\">\n    <app-button type=\"primary\" [action]=\"showAlert\"></app-button>\n    <app-button type=\"secondary\"></app-button>\n    <app-button type=\"primary\" [action]=\"showAlert\" [disabled]=\"true\"></app-button>\n</app-default-page>"
+            "templateData": "<app-default-page [title]=\"'Button'\" [code]=\"code\">\n    <app-button type=\"primary\" [action]=\"showAlert\"></app-button>\n</app-default-page>"
         },
         {
             "name": "DefaultPageComponent",
@@ -393,12 +409,12 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@import \"/src/assets/variables\";\n\n.default {\n    margin-top: 16px;\n\n    &__title {\n        color: $yellow;\n    }\n\n    &__separator {\n        border: solid $yellow;\n    }\n\n    &__content {\n        margin-top: 32px;\n        padding: 16px;\n        border: solid 1px;\n    }\n\n    &__action {\n        border: none;\n        background-color: $white;\n        display: flex;\n        padding: 4px;\n\n        &:hover {\n            background-color: $light-gray;\n        }\n    }\n}\n\n.hide {\n    display: none;\n}",
+                    "data": "@import \"/src/assets/variables\";\n\n.default {\n    margin-top: 16px;\n\n    &__title {\n        color: $yellow;\n    }\n\n    &__separator {\n        border: solid $yellow;\n    }\n\n    &__content {\n        margin-top: 32px;\n        padding: 16px;\n        border: solid 1px;\n    }\n\n    &__action {\n        border: none;\n        background-color: $white;\n        display: flex;\n        margin-top: 8px;\n        padding: 4px;\n\n        &:hover {\n            background-color: $dark-gray;\n        }\n    }\n}\n\n.hide {\n    display: none;\n}\n\n.code {\n    background-color: $light-gray;\n}",
                     "styleUrl": "./default-page.component.scss"
                 }
             ],
             "stylesData": "",
-            "templateData": "<div class=\"default container\">\n    <h2 class=\"default__title\">{{title}}</h2>\n    <div class=\"default__separator\"></div>\n    <div class=\"default__content\">\n        <div class=\"default__preview\" [ngClass]=\"{hide: !showPreview}\">\n            <ng-content></ng-content>\n        </div>\n        <div class=\"default__code\" [ngClass]=\"{hide: showPreview}\">\n            {{code}}\n        </div>\n        <div class=\"\">\n            <button class=\"default__action\" (click)=\"changeView()\">\n                <img src=\"assets/svg/code.svg\" alt=\"code\" />\n            </button>\n        </div>\n    </div>\n</div>"
+            "templateData": "<div class=\"default container\">\n    <h2 class=\"default__title\">{{title}}</h2>\n    <div class=\"default__separator\"></div>\n    <div class=\"default__content\">\n        <div class=\"default__preview\" [ngClass]=\"{hide: !showPreview}\">\n            <ng-content></ng-content>\n        </div>\n        <div class=\"default__code\" [ngClass]=\"{hide: showPreview}\">\n            {{code}}\n        </div>\n        <div class=\"d-flex justify-content-end\">\n            <button class=\"default__action\" (click)=\"changeView()\" [ngClass]=\"{code: !showPreview}\">\n                <img src=\"assets/svg/code.svg\" alt=\"code\" />\n            </button>\n        </div>\n    </div>\n</div>"
         },
         {
             "name": "ErrorComponent",
@@ -519,69 +535,7 @@
         },
         {
             "name": "HeaderComponent",
-            "id": "component-HeaderComponent-a68ad1da7809786c1e7f267abf58dc65",
-            "file": "src/stories/header.component.ts",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "storybook-header",
-            "styleUrls": [
-                "./header.css"
-            ],
-            "styles": [],
-            "template": "<header>    <div class=\"wrapper\">\n      <div>\n        <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n              fill=\"#FFF\"\n            />\n            <path\n              d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n              fill=\"#555AB9\"\n            />\n            <path\n              d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\"\n              fill=\"#91BAF8\"\n            />\n          </g>\n        </svg>\n        <h1>Acme</h1>\n      </div>\n    </div>\n  </header>",
-            "templateUrl": [],
-            "viewProviders": [],
-            "inputsClass": [
-                {
-                    "name": "user",
-                    "defaultValue": "null",
-                    "line": 32,
-                    "type": "unknown"
-                }
-            ],
-            "outputsClass": [
-                {
-                    "name": "onCreateAccount",
-                    "defaultValue": "new EventEmitter<Event>()",
-                    "line": 41,
-                    "type": "EventEmitter"
-                },
-                {
-                    "name": "onLogin",
-                    "defaultValue": "new EventEmitter<Event>()",
-                    "line": 35,
-                    "type": "EventEmitter"
-                },
-                {
-                    "name": "onLogout",
-                    "defaultValue": "new EventEmitter<Event>()",
-                    "line": 38,
-                    "type": "EventEmitter"
-                }
-            ],
-            "propertiesClass": [],
-            "methodsClass": [],
-            "hostBindings": [],
-            "hostListeners": [],
-            "description": "",
-            "rawdescription": "",
-            "type": "component",
-            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\n\n@Component({\n  selector: 'storybook-header',\n  template: `<header>\n    <div class=\"wrapper\">\n      <div>\n        <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n              fill=\"#FFF\"\n            />\n            <path\n              d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n              fill=\"#555AB9\"\n            />\n            <path\n              d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\"\n              fill=\"#91BAF8\"\n            />\n          </g>\n        </svg>\n        <h1>Acme</h1>\n      </div>\n    </div>\n  </header>`,\n  styleUrls: ['./header.css'],\n})\nexport default class HeaderComponent {\n  @Input()\n  user: unknown = null;\n\n  @Output()\n  onLogin = new EventEmitter<Event>();\n\n  @Output()\n  onLogout = new EventEmitter<Event>();\n\n  @Output()\n  onCreateAccount = new EventEmitter<Event>();\n}\n",
-            "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": ".wrapper {\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n  padding: 15px 20px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n\nsvg {\n  display: inline-block;\n  vertical-align: top;\n}\n\nh1 {\n  font-weight: 900;\n  font-size: 20px;\n  line-height: 1;\n  margin: 6px 0 6px 10px;\n  display: inline-block;\n  vertical-align: top;\n}\n\nbutton + button {\n  margin-left: 10px;\n}\n",
-                    "styleUrl": "./header.css"
-                }
-            ],
-            "stylesData": ""
-        },
-        {
-            "name": "HeaderComponent",
-            "id": "component-HeaderComponent-2b83331db3eaaf641e8835029544c09f-1",
+            "id": "component-HeaderComponent-2b83331db3eaaf641e8835029544c09f",
             "file": "src/app/core/header/header.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -644,9 +598,6 @@
                     }
                 ]
             },
-            "isDuplicate": true,
-            "duplicateId": 1,
-            "duplicateName": "HeaderComponent-1",
             "templateData": "<div class=\"header row d-flex justify-content-evenly m-0\">\n    <app-hamburger-button class=\"header__menu\"></app-hamburger-button>\n    <a [routerLink]=\"['/']\" (click)=\"closeMenu()\">Component Lib</a>\n</div>"
         },
         {
@@ -870,68 +821,6 @@
             "templateData": "<app-default-page [title]=\"'Input'\" [code]=\"code\">\n    <app-input\n        label=\"Input field\"\n        id=\"simple-input\"\n        [disabled]=\"false\"\n        [errors]=\"errors\"\n        [control]=\"control\"\n    >\n    </app-input>\n</app-default-page>"
         },
         {
-            "name": "PageComponent",
-            "id": "component-PageComponent-8f196770333aa216860a88c0b6b221aa",
-            "file": "src/stories/page.component.ts",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "storybook-page",
-            "styleUrls": [
-                "./page.css"
-            ],
-            "styles": [],
-            "template": "<article>    <storybook-header\n      [user]=\"user\"\n      (onLogout)=\"onLogout.emit($event)\"\n      (onLogin)=\"onLogin.emit($event)\"\n      (onCreateAccount)=\"onCreateAccount.emit($event)\"\n    ></storybook-header>\n    <section>\n      <h2>Pages in Storybook</h2>\n      <p>\n        We recommend building UIs with a\n        <a href=\"https://componentdriven.org\" target=\"_blank\" rel=\"noopener noreferrer\">\n          <strong>component-driven</strong>\n        </a>\n        process starting with atomic components and ending with pages.\n      </p>\n      <p>\n        Render pages with mock data. This makes it easy to build and review page states without\n        needing to navigate to them in your app. Here are some handy patterns for managing page data\n        in Storybook:\n      </p>\n      <ul>\n        <li>\n          Use a higher-level connected component. Storybook helps you compose such data from the\n          \"args\" of child component stories\n        </li>\n        <li>\n          Assemble data in the page component from your services. You can mock these services out\n          using Storybook.\n        </li>\n      </ul>\n      <p>\n        Get a guided tutorial on component-driven development at\n        <a href=\"https://storybook.js.org/tutorials/\" target=\"_blank\" rel=\"noopener noreferrer\">\n          Storybook tutorials\n        </a>\n        . Read more in the\n        <a href=\"https://storybook.js.org/docs\" target=\"_blank\" rel=\"noopener noreferrer\"> docs </a>\n        .\n      </p>\n      <div class=\"tip-wrapper\">\n        <span class=\"tip\">Tip</span> Adjust the width of the canvas with the\n        <svg width=\"10\" height=\"10\" viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z\"\n              id=\"a\"\n              fill=\"#999\"\n            />\n          </g>\n        </svg>\n        Viewports addon in the toolbar\n      </div>\n    </section>\n  </article>",
-            "templateUrl": [],
-            "viewProviders": [],
-            "inputsClass": [
-                {
-                    "name": "user",
-                    "defaultValue": "null",
-                    "line": 64,
-                    "type": "unknown"
-                }
-            ],
-            "outputsClass": [
-                {
-                    "name": "onCreateAccount",
-                    "defaultValue": "new EventEmitter<Event>()",
-                    "line": 73,
-                    "type": "EventEmitter"
-                },
-                {
-                    "name": "onLogin",
-                    "defaultValue": "new EventEmitter<Event>()",
-                    "line": 67,
-                    "type": "EventEmitter"
-                },
-                {
-                    "name": "onLogout",
-                    "defaultValue": "new EventEmitter<Event>()",
-                    "line": 70,
-                    "type": "EventEmitter"
-                }
-            ],
-            "propertiesClass": [],
-            "methodsClass": [],
-            "hostBindings": [],
-            "hostListeners": [],
-            "description": "",
-            "rawdescription": "",
-            "type": "component",
-            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\n\n@Component({\n  selector: 'storybook-page',\n  template: `<article>\n    <storybook-header\n      [user]=\"user\"\n      (onLogout)=\"onLogout.emit($event)\"\n      (onLogin)=\"onLogin.emit($event)\"\n      (onCreateAccount)=\"onCreateAccount.emit($event)\"\n    ></storybook-header>\n    <section>\n      <h2>Pages in Storybook</h2>\n      <p>\n        We recommend building UIs with a\n        <a href=\"https://componentdriven.org\" target=\"_blank\" rel=\"noopener noreferrer\">\n          <strong>component-driven</strong>\n        </a>\n        process starting with atomic components and ending with pages.\n      </p>\n      <p>\n        Render pages with mock data. This makes it easy to build and review page states without\n        needing to navigate to them in your app. Here are some handy patterns for managing page data\n        in Storybook:\n      </p>\n      <ul>\n        <li>\n          Use a higher-level connected component. Storybook helps you compose such data from the\n          \"args\" of child component stories\n        </li>\n        <li>\n          Assemble data in the page component from your services. You can mock these services out\n          using Storybook.\n        </li>\n      </ul>\n      <p>\n        Get a guided tutorial on component-driven development at\n        <a href=\"https://storybook.js.org/tutorials/\" target=\"_blank\" rel=\"noopener noreferrer\">\n          Storybook tutorials\n        </a>\n        . Read more in the\n        <a href=\"https://storybook.js.org/docs\" target=\"_blank\" rel=\"noopener noreferrer\"> docs </a>\n        .\n      </p>\n      <div class=\"tip-wrapper\">\n        <span class=\"tip\">Tip</span> Adjust the width of the canvas with the\n        <svg width=\"10\" height=\"10\" viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z\"\n              id=\"a\"\n              fill=\"#999\"\n            />\n          </g>\n        </svg>\n        Viewports addon in the toolbar\n      </div>\n    </section>\n  </article>`,\n  styleUrls: ['./page.css'],\n})\nexport default class PageComponent {\n  @Input()\n  user: unknown = null;\n\n  @Output()\n  onLogin = new EventEmitter<Event>();\n\n  @Output()\n  onLogout = new EventEmitter<Event>();\n\n  @Output()\n  onCreateAccount = new EventEmitter<Event>();\n}\n\n// export const Page = ({ user, onLogin, onLogout, onCreateAccount }) => (\n//   <article>\n//     <Header user={user} onLogin={onLogin} onLogout={onLogout} onCreateAccount={onCreateAccount} />\n\n// );\n// Page.propTypes = {\n//   user: PropTypes.shape({}),\n//   onLogin: PropTypes.func.isRequired,\n//   onLogout: PropTypes.func.isRequired,\n//   onCreateAccount: PropTypes.func.isRequired,\n// };\n\n// Page.defaultProps = {\n//   user: null,\n// };\n",
-            "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": "section {\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  font-size: 14px;\n  line-height: 24px;\n  padding: 48px 20px;\n  margin: 0 auto;\n  max-width: 600px;\n  color: #333;\n}\n\nh2 {\n  font-weight: 900;\n  font-size: 32px;\n  line-height: 1;\n  margin: 0 0 4px;\n  display: inline-block;\n  vertical-align: top;\n}\n\np {\n  margin: 1em 0;\n}\n\na {\n  text-decoration: none;\n  color: #1ea7fd;\n}\n\nul {\n  padding-left: 30px;\n  margin: 1em 0;\n}\n\nli {\n  margin-bottom: 8px;\n}\n\n.tip {\n  display: inline-block;\n  border-radius: 1em;\n  font-size: 11px;\n  line-height: 12px;\n  font-weight: 700;\n  background: #e7fdd8;\n  color: #66bf3c;\n  padding: 4px 12px;\n  margin-right: 10px;\n  vertical-align: top;\n}\n\n.tip-wrapper {\n  font-size: 13px;\n  line-height: 20px;\n  margin-top: 40px;\n  margin-bottom: 40px;\n}\n\n.tip-wrapper svg {\n  display: inline-block;\n  height: 12px;\n  width: 12px;\n  margin-right: 4px;\n  vertical-align: top;\n  margin-top: 3px;\n}\n\n.tip-wrapper svg path {\n  fill: #1ea7fd;\n}\n",
-                    "styleUrl": "./page.css"
-                }
-            ],
-            "stylesData": ""
-        },
-        {
             "name": "SelectComponent",
             "id": "component-SelectComponent-70e55c6e1fbf0ab3da236cd6c1aed4f4",
             "file": "src/app/components/select/select.component.ts",
@@ -1147,7 +1036,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@import \"/src/assets/variables\";\n\n.menu {\n    height: 100%;\n    border: solid 1px;\n    background-color: $white;\n\n    &__list {\n        padding-left: 0;\n    }\n\n    &__item {\n       list-style-type: none;\n       border-bottom: 1px solid;\n       font-size: 30px;\n       padding-left: 2px;\n\n       .menu__link {\n           display: block;\n       }\n\n       &:hover {\n           background-color: $dark-gray;\n       }\n    }\n\n    &__item--active {\n        background-color: $navy-blue;\n\n        .menu__link {\n            color: $yellow;\n        }\n\n        &:hover {\n            background-color: $navy-blue;\n        }\n    }\n\n    &__link {\n        color: $navy-blue;\n        &:hover {\n            text-decoration: none;\n        }\n    }\n}\n\n@media (min-width: $mobile-width) {\n    .menu__item {\n        font-size: 1rem;\n    }\n}\n",
+                    "data": "@import \"/src/assets/variables\";\n\n.menu {\n    height: 100%;\n    background-color: $white;\n\n    &__header {\n        padding: 8px;\n    }\n\n    &__title {\n        color: $yellow;\n        font-weight: bold;\n    }\n\n    &__list {\n        padding-left: 0;\n    }\n\n    &__item {\n       list-style-type: none;\n       border-bottom: 1px solid $light-gray;\n       font-size: 1.2rem;\n       padding-left: 2px;\n\n       .menu__link {\n           display: block;\n           padding: 4px 8px;\n       }\n\n       &:hover {\n           background-color: $dark-gray;\n       }\n    }\n\n    &__item--active {\n        background-color: $navy-blue;\n\n        .menu__link {\n            color: $yellow;\n        }\n\n        &:hover {\n            background-color: $navy-blue;\n        }\n    }\n\n    &__link {\n        color: $navy-blue;\n        &:hover {\n            text-decoration: none;\n        }\n    }\n}\n\n@media (min-width: $mobile-width) {\n    .menu__item {\n        font-size: 1rem;\n    }\n}\n",
                     "styleUrl": "./sidebar-menu.component.scss"
                 }
             ],
@@ -1172,7 +1061,7 @@
                     }
                 ]
             },
-            "templateData": "<aside class=\"menu\">\n    <nav>\n        <ul class=\"menu__list\">\n            <li class=\"menu__item\" [routerLinkActive]=\"'menu__item--active'\" *ngFor=\"let item of menuItems\">\n                <a [routerLink]=\"[item.url]\" class=\"menu__link\" (click)=\"closeMenu()\">{{item.name}}</a>\n            </li>\n        </ul>\n    </nav>\n</aside>"
+            "templateData": "<aside class=\"menu\">\n    <div class=\"menu__header\">\n        <h5 class=\"menu__title\">Components</h5>\n    </div>\n    <nav>\n        <ul class=\"menu__list\">\n            <li class=\"menu__item\" [routerLinkActive]=\"'menu__item--active'\" *ngFor=\"let item of menuItems\">\n                <a [routerLink]=\"[item.url]\" class=\"menu__link\" (click)=\"closeMenu()\">{{item.name}}</a>\n            </li>\n        </ul>\n    </nav>\n</aside>"
         }
     ],
     "modules": [
@@ -1418,6 +1307,9 @@
                     "elements": [
                         {
                             "name": "HamburgerButtonComponent"
+                        },
+                        {
+                            "name": "HeaderComponent"
                         }
                     ]
                 },
@@ -1430,6 +1322,9 @@
                     "elements": [
                         {
                             "name": "HamburgerButtonComponent"
+                        },
+                        {
+                            "name": "HeaderComponent"
                         }
                     ]
                 },
@@ -1656,12 +1551,28 @@
     "miscellaneous": {
         "variables": [
             {
+                "name": "action",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/button.stories.ts",
+                "type": "",
+                "defaultValue": "() => alert('clicked')"
+            },
+            {
                 "name": "components",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/core/header/header.module.ts",
                 "type": "[]",
                 "defaultValue": "[HeaderComponent, HamburgerButtonComponent]"
+            },
+            {
+                "name": "Disabled",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/button.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
             },
             {
                 "name": "Disabled",
@@ -1728,38 +1639,6 @@
                 "defaultValue": "Template.bind({})"
             },
             {
-                "name": "LoggedIn",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Header.stories.ts",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "LoggedIn",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Page.stories.ts",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "LoggedOut",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Header.stories.ts",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "LoggedOut",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/Page.stories.ts",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
                 "name": "Masked",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -1776,20 +1655,20 @@
                 "defaultValue": "[\n    {\n        value: 'option1',\n        viewValue: 'Option 1'\n    },\n    {\n        value: 'option2',\n        viewValue: 'Option 2'\n    }\n]"
             },
             {
-                "name": "Template",
+                "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/Header.stories.ts",
-                "type": "Story<Header>",
-                "defaultValue": "(args: Header) => ({\n  props: args,\n})"
+                "file": "src/stories/button.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
             },
             {
-                "name": "Template",
+                "name": "Secondary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/Page.stories.ts",
-                "type": "Story<Page>",
-                "defaultValue": "(args: Page) => ({\n  props: args,\n})"
+                "file": "src/stories/button.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
             },
             {
                 "name": "Template",
@@ -1839,6 +1718,48 @@
         ],
         "enumerations": [],
         "groupedVariables": {
+            "src/stories/button.stories.ts": [
+                {
+                    "name": "action",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/button.stories.ts",
+                    "type": "",
+                    "defaultValue": "() => alert('clicked')"
+                },
+                {
+                    "name": "Disabled",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/button.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/button.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Secondary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/button.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/button.stories.ts",
+                    "type": "Story<ButtonComponent>",
+                    "defaultValue": "(args: ButtonComponent) => ({\n  props: args,\n})"
+                }
+            ],
             "src/app/core/header/header.module.ts": [
                 {
                     "name": "components",
@@ -1952,68 +1873,6 @@
                     "type": "object",
                     "defaultValue": "{\n  production: false\n}"
                 }
-            ],
-            "src/stories/Header.stories.ts": [
-                {
-                    "name": "LoggedIn",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Header.stories.ts",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "LoggedOut",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Header.stories.ts",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Header.stories.ts",
-                    "type": "Story<Header>",
-                    "defaultValue": "(args: Header) => ({\n  props: args,\n})"
-                }
-            ],
-            "src/stories/Page.stories.ts": [
-                {
-                    "name": "LoggedIn",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Page.stories.ts",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "LoggedOut",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Page.stories.ts",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Page.stories.ts",
-                    "type": "Story<Page>",
-                    "defaultValue": "(args: Page) => ({\n  props: args,\n})"
-                }
-            ],
-            "src/stories/button.stories.ts": [
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/button.stories.ts",
-                    "type": "Story<ButtonComponent>",
-                    "defaultValue": "(args: ButtonComponent) => ({\n  props: args,\n})"
-                }
             ]
         },
         "groupedFunctions": {},
@@ -2091,7 +1950,7 @@
                 "linktype": "component",
                 "name": "ButtonComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/6",
+                "coverageCount": "0/7",
                 "status": "low"
             },
             {
@@ -2173,7 +2032,7 @@
                 "linktype": "component",
                 "name": "ButtonPageComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/2",
+                "coverageCount": "0/3",
                 "status": "low"
             },
             {
@@ -2242,61 +2101,41 @@
                 "status": "low"
             },
             {
-                "filePath": "src/stories/Header.stories.ts",
+                "filePath": "src/stories/button.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "LoggedIn",
+                "name": "action",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
             },
             {
-                "filePath": "src/stories/Header.stories.ts",
+                "filePath": "src/stories/button.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "LoggedOut",
+                "name": "Disabled",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
             },
             {
-                "filePath": "src/stories/Header.stories.ts",
+                "filePath": "src/stories/button.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "Template",
+                "name": "Primary",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
             },
             {
-                "filePath": "src/stories/Page.stories.ts",
+                "filePath": "src/stories/button.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "LoggedIn",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Page.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "LoggedOut",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/Page.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Template",
+                "name": "Secondary",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -2309,15 +2148,6 @@
                 "name": "Template",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/header.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "HeaderComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/5",
                 "status": "low"
             },
             {
@@ -2368,15 +2198,6 @@
                 "name": "Template",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/page.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "PageComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/5",
                 "status": "low"
             },
             {

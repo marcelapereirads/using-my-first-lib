@@ -12,7 +12,7 @@
     "storybook": "npm run docs:json && start-storybook -p 6006",
     "build-storybook": "npm run docs:json && build-storybook"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@angular/animations": "~11.2.10",
     "@angular/cdk": "^11.2.10",
@@ -23,6 +23,7 @@
     "@angular/platform-browser": "~11.2.10",
     "@angular/platform-browser-dynamic": "~11.2.10",
     "@angular/router": "~11.2.10",
+    "basic-component-library": "^1.0.3",
     "bootstrap": "^4.6.0",
     "ngx-mask": "^11.1.5",
     "rxjs": "~6.6.0",

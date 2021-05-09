@@ -1,9 +1,10 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+import { SelectModule } from 'basic-component-library';
 
 import { DefaultPageModule } from '../default-page/default-page.module';
 import { SelectPageComponent } from './select-page.component';
-import { SelectModule } from 'src/app/components/select/select.module';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { SelectModule } from 'src/app/components/select/select.module';
     CommonModule,
     DefaultPageModule,
     SelectModule
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class SelectPageModule { }

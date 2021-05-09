@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { ButtonModule } from 'basic-component-library';
 import { DefaultPageModule } from '../default-page/default-page.module';
 import { ButtonPageComponent } from './button-page.component';
-import { ButtonModule } from 'src/app/components/button/button.module';
 
 @NgModule({
   declarations: [
@@ -13,6 +13,7 @@ import { ButtonModule } from 'src/app/components/button/button.module';
     CommonModule,
     DefaultPageModule,
     ButtonModule
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ButtonPageModule { }
