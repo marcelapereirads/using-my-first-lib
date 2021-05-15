@@ -1,3 +1,11 @@
 # Storybook Study Project
 
-This project is a component library, created to study the Storybook tool.
+This project implements the library created in the [my-first-lib](https://github.com/marcelapereirads/my-first-lib) project.
+
+## Scripts
+
+### Install the dependencies:
+> npm i
+
+### Running the project:
+> ng serve
