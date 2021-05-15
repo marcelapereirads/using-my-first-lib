@@ -1,7 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SelectModule } from 'basic-component-library';
+import { SelectModule } from 'basic-component-lib';
 
 import { DefaultPageModule } from '../default-page/default-page.module';
 import { SelectPageComponent } from './select-page.component';
