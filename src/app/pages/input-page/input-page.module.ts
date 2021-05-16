@@ -1,7 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { InputModule } from 'basic-component-lib';
+import { InputModule } from 'basic-component-library';
 
 import { DefaultPageModule } from '../default-page/default-page.module';
 import { InputPageComponent } from './input-page.component';
