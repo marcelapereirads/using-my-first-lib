@@ -1,0 +1,19 @@
+<form [formGroup]="form" class="login">
+    <fieldset class="login__fields">
+        <legend>Login</legend>
+        <lib-input
+            label="Username"
+            [control]="getControl('username')"
+            [errors]="getErrors('username')"
+        >
+        </lib-input>
+        <lib-input
+            label="Password"
+            type="password"
+            [control]="getControl('password')"
+            [errors]="getErrors('password')"
+        >
+        </lib-input>
+        <lib-button text="Login" class="login__submit"></lib-button>
+    </fieldset>
+</form>

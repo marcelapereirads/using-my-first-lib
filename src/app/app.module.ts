@@ -5,20 +5,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderModule } from './core/header/header.module';
 import { SidebarMenuModule } from './core/sidebar-menu/sidebar-menu.module';
-import { HomeComponent } from './pages/home/home.component';
+import { HomeModule } from './pages/home/home.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HeaderModule,
-    SidebarMenuModule
+    SidebarMenuModule,
+    HomeModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

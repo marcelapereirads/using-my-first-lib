@@ -2,11 +2,11 @@
     "pipes": [],
     "interfaces": [
         {
-            "name": "IErrors",
-            "id": "interface-IErrors-7cf5a11d0b42375b7f5a5eab32c34ee3",
+            "name": "Errors",
+            "id": "interface-Errors-5043f799c731f1d1b7213d838992e57a",
             "file": "src/app/pages/input-page/input-page.component.ts",
             "type": "interface",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { FormControl, Validators } from '@angular/forms';\n\ninterface IErrors {\n  required: string;\n  maxlength: string;\n}\n\n@Component({\n  selector: 'app-input-page',\n  templateUrl: './input-page.component.html'\n})\nexport class InputPageComponent {\n\n  get errors(): string[] {\n    const errorMessages: IErrors = {\n      required: 'Please fill in the field',\n      maxlength: 'The value exceeds the allowed number of characters'\n    };\n \n    if (this.control.errors !== null) {\n      return Object.keys(this.control.errors).map((error) => errorMessages[error as keyof IErrors]);\n    }\n\n    return [];\n  }\n\n  control = new FormControl(null, [Validators.required, Validators.maxLength(10)]);\n\n  readonly code = `<app-input label=\"Input field\" id=\"simple-input\" [disabled]=\"false\" [errors]=\"errors\" [control]=\"control\"></app-input>`;\n\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { FormControl, Validators } from '@angular/forms';\n\ninterface Errors {\n  required: string;\n  maxlength: string;\n}\n\n@Component({\n  selector: 'app-input-page',\n  templateUrl: './input-page.component.html',\n})\nexport class InputPageComponent {\n  get errors(): string[] {\n    const errorMessages: Errors = {\n      required: 'Please fill in the field',\n      maxlength: 'The value exceeds the allowed number of characters',\n    };\n\n    if (this.control.errors !== null) {\n      return Object.keys(this.control.errors).map(\n        (error) => errorMessages[error as keyof Errors]\n      );\n    }\n\n    return [];\n  }\n\n  control = new FormControl(null, [\n    Validators.required,\n    Validators.maxLength(10),\n  ]);\n\n  readonly code = `<app-input label=\"Input field\" id=\"simple-input\" [disabled]=\"false\" [errors]=\"errors\" [control]=\"control\"></app-input>`;\n}\n",
             "properties": [
                 {
                     "name": "maxlength",
@@ -21,6 +21,32 @@
                     "optional": false,
                     "description": "",
                     "line": 5
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 150,
+            "methods": []
+        },
+        {
+            "name": "LoginError",
+            "id": "interface-LoginError-27bbf1ac16e0c4dfc5a7479e61c38701",
+            "file": "src/app/pages/home/login-sample/login-error.interface.ts",
+            "type": "interface",
+            "sourceCode": "export interface LoginError {\n  required: string;\n  minlength: string;\n}\n",
+            "properties": [
+                {
+                    "name": "minlength",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 3
+                },
+                {
+                    "name": "required",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 2
                 }
             ],
             "indexSignatures": [],
@@ -530,11 +556,11 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div class=\"home\">\n    <h2 class=\"home__title\">About the project</h2>\n    <p>This project is a component library, created to study the Storybook tool.</p>\n    <p>See the Storybook documentation <a href=\"https://storybook.js.org/\">here</a>.</p>\n</div>\n"
+            "templateData": "<div class=\"home\">\n    <h2 class=\"home__title\">About the project</h2>\n    <p>This project is a component library demo built with Angular and Storybook.</p>\n\n    <h3 class=\"home__title\">Sample</h3>\n    <app-login-sample></app-login-sample>\n</div>"
         },
         {
             "name": "InputPageComponent",
-            "id": "component-InputPageComponent-7cf5a11d0b42375b7f5a5eab32c34ee3",
+            "id": "component-InputPageComponent-5043f799c731f1d1b7213d838992e57a",
             "file": "src/app/pages/input-page/input-page.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -557,18 +583,18 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 30,
+                    "line": 34,
                     "modifierKind": [
                         132
                     ]
                 },
                 {
                     "name": "control",
-                    "defaultValue": "new FormControl(null, [Validators.required, Validators.maxLength(10)])",
+                    "defaultValue": "new FormControl(null, [\n    Validators.required,\n    Validators.maxLength(10),\n  ])",
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 28
+                    "line": 29
                 }
             ],
             "methodsClass": [],
@@ -577,7 +603,7 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { FormControl, Validators } from '@angular/forms';\n\ninterface IErrors {\n  required: string;\n  maxlength: string;\n}\n\n@Component({\n  selector: 'app-input-page',\n  templateUrl: './input-page.component.html'\n})\nexport class InputPageComponent {\n\n  get errors(): string[] {\n    const errorMessages: IErrors = {\n      required: 'Please fill in the field',\n      maxlength: 'The value exceeds the allowed number of characters'\n    };\n \n    if (this.control.errors !== null) {\n      return Object.keys(this.control.errors).map((error) => errorMessages[error as keyof IErrors]);\n    }\n\n    return [];\n  }\n\n  control = new FormControl(null, [Validators.required, Validators.maxLength(10)]);\n\n  readonly code = `<app-input label=\"Input field\" id=\"simple-input\" [disabled]=\"false\" [errors]=\"errors\" [control]=\"control\"></app-input>`;\n\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { FormControl, Validators } from '@angular/forms';\n\ninterface Errors {\n  required: string;\n  maxlength: string;\n}\n\n@Component({\n  selector: 'app-input-page',\n  templateUrl: './input-page.component.html',\n})\nexport class InputPageComponent {\n  get errors(): string[] {\n    const errorMessages: Errors = {\n      required: 'Please fill in the field',\n      maxlength: 'The value exceeds the allowed number of characters',\n    };\n\n    if (this.control.errors !== null) {\n      return Object.keys(this.control.errors).map(\n        (error) => errorMessages[error as keyof Errors]\n      );\n    }\n\n    return [];\n  }\n\n  control = new FormControl(null, [\n    Validators.required,\n    Validators.maxLength(10),\n  ]);\n\n  readonly code = `<app-input label=\"Input field\" id=\"simple-input\" [disabled]=\"false\" [errors]=\"errors\" [control]=\"control\"></app-input>`;\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -588,11 +614,142 @@
                         "name": "errors",
                         "type": "[]",
                         "returnType": "string[]",
-                        "line": 15
+                        "line": 14
                     }
                 }
             },
             "templateData": "<app-default-page [title]=\"'Input'\" [code]=\"code\">\n    <lib-input\n        label=\"Input field\"\n        id=\"simple-input\"\n        [disabled]=\"false\"\n        [errors]=\"errors\"\n        [control]=\"control\"\n    >\n    </lib-input>\n</app-default-page>"
+        },
+        {
+            "name": "LoginSampleComponent",
+            "id": "component-LoginSampleComponent-22d6c12a55646caa197c5a54dab3373e",
+            "file": "src/app/pages/home/login-sample/login-sample.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-login-sample",
+            "styleUrls": [
+                "./login-sample.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./login-sample.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "form",
+                    "defaultValue": "this.createForm()",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 17
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "createForm",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "FormGroup",
+                    "typeParameters": [],
+                    "line": 23
+                },
+                {
+                    "name": "getControl",
+                    "args": [
+                        {
+                            "name": "fieldName",
+                            "type": "string"
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 30,
+                    "jsdoctags": [
+                        {
+                            "name": "fieldName",
+                            "type": "string",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "getErrors",
+                    "args": [
+                        {
+                            "name": "fieldName",
+                            "type": "string"
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 34,
+                    "jsdoctags": [
+                        {
+                            "name": "fieldName",
+                            "type": "string",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 21
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport {\n  FormBuilder,\n  FormControl,\n  FormGroup,\n  Validators,\n} from '@angular/forms';\nimport { LoginErrorMessages } from './login-error-messages.constant';\nimport { LoginError } from './login-error.interface';\n\n@Component({\n  selector: 'app-login-sample',\n  templateUrl: './login-sample.component.html',\n  styleUrls: ['./login-sample.component.scss'],\n})\nexport class LoginSampleComponent implements OnInit {\n  form = this.createForm();\n\n  constructor(private formBuilder: FormBuilder) {}\n\n  ngOnInit(): void {}\n\n  createForm(): FormGroup {\n    return this.formBuilder.group({\n      username: ['', [Validators.required]],\n      password: ['', [Validators.required, Validators.minLength(6)]],\n    });\n  }\n\n  getControl(fieldName: string) {\n    return this.form.get(fieldName) as FormControl;\n  }\n\n  getErrors(fieldName: string) {\n    const errors = this.form.get(fieldName)?.errors as FormControl;\n\n    if (errors) {\n      return Object.keys(errors).map(\n        (error: string) => LoginErrorMessages[error as keyof LoginError]\n      );\n    }\n\n    return [];\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "@import \"/src/assets/variables\";\n\n.login {\n    width: fit-content;\n    padding: 0.8rem;\n    border: solid $primary-color;\n    border-radius: 0.5rem;\n\n    &__fields {\n        display: flex;\n        flex-direction: column;\n        align-items: flex-start;\n    }\n\n    &__submit {\n        margin-top: 2rem;\n    }\n}",
+                    "styleUrl": "./login-sample.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [
+                    {
+                        "name": "formBuilder",
+                        "type": "FormBuilder"
+                    }
+                ],
+                "line": 17,
+                "jsdoctags": [
+                    {
+                        "name": "formBuilder",
+                        "type": "FormBuilder",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<form [formGroup]=\"form\" class=\"login\">\n    <fieldset class=\"login__fields\">\n        <legend>Login</legend>\n        <lib-input\n            label=\"Username\"\n            [control]=\"getControl('username')\"\n            [errors]=\"getErrors('username')\"\n        >\n        </lib-input>\n        <lib-input\n            label=\"Password\"\n            type=\"password\"\n            [control]=\"getControl('password')\"\n            [errors]=\"getErrors('password')\"\n        >\n        </lib-input>\n        <lib-button text=\"Login\" class=\"login__submit\"></lib-button>\n    </fieldset>\n</form>"
         },
         {
             "name": "SelectPageComponent",
@@ -754,9 +911,6 @@
                     "elements": [
                         {
                             "name": "AppComponent"
-                        },
-                        {
-                            "name": "HomeComponent"
                         }
                     ]
                 },
@@ -768,6 +922,9 @@
                         },
                         {
                             "name": "HeaderModule"
+                        },
+                        {
+                            "name": "HomeModule"
                         },
                         {
                             "name": "SidebarMenuModule"
@@ -939,6 +1096,42 @@
             ]
         },
         {
+            "name": "HomeModule",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "HomeComponent"
+                        },
+                        {
+                            "name": "LoginSampleComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
             "name": "InputPageModule",
             "children": [
                 {
@@ -1085,6 +1278,14 @@
                 "file": "src/environments/environment.ts",
                 "type": "object",
                 "defaultValue": "{\n  production: false\n}"
+            },
+            {
+                "name": "LoginErrorMessages",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/pages/home/login-sample/login-error-messages.constant.ts",
+                "type": "object",
+                "defaultValue": "{\n  required: 'Please fill in the field',\n  minlength: 'The minimum password length is 6 digits',\n}"
             }
         ],
         "functions": [],
@@ -1119,6 +1320,16 @@
                     "file": "src/environments/environment.ts",
                     "type": "object",
                     "defaultValue": "{\n  production: false\n}"
+                }
+            ],
+            "src/app/pages/home/login-sample/login-error-messages.constant.ts": [
+                {
+                    "name": "LoginErrorMessages",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/pages/home/login-sample/login-error-messages.constant.ts",
+                    "type": "object",
+                    "defaultValue": "{\n  required: 'Please fill in the field',\n  minlength: 'The minimum password length is 6 digits',\n}"
                 }
             ]
         },
@@ -1244,6 +1455,34 @@
                 "status": "low"
             },
             {
+                "filePath": "src/app/pages/home/login-sample/login-error-messages.constant.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "LoginErrorMessages",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/pages/home/login-sample/login-error.interface.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "LoginError",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/pages/home/login-sample/login-sample.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "LoginSampleComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
                 "filePath": "src/app/pages/input-page/input-page.component.ts",
                 "type": "component",
                 "linktype": "component",
@@ -1256,7 +1495,7 @@
                 "filePath": "src/app/pages/input-page/input-page.component.ts",
                 "type": "interface",
                 "linktype": "interface",
-                "name": "IErrors",
+                "name": "Errors",
                 "coveragePercent": 0,
                 "coverageCount": "0/3",
                 "status": "low"
