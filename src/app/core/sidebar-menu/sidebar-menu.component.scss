@@ -9,7 +9,7 @@
     }
 
     &__title {
-        color: $yellow;
+        color: $secondary-color;
         font-weight: bold;
     }
 
@@ -26,27 +26,28 @@
        .menu__link {
            display: block;
            padding: 4px 8px;
+           font-weight: bold;
        }
 
        &:hover {
-           background-color: $dark-gray;
+           background-color: $light-gray;
        }
     }
 
     &__item--active {
-        background-color: $navy-blue;
+        background-color: $primary-color;
 
         .menu__link {
-            color: $yellow;
+            color: $secondary-color;
         }
 
         &:hover {
-            background-color: $navy-blue;
+            background-color: $primary-color;
         }
     }
 
     &__link {
-        color: $navy-blue;
+        color: $primary-color;
         &:hover {
             text-decoration: none;
         }

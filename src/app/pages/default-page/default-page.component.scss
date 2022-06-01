@@ -4,11 +4,11 @@
     margin-top: 16px;
 
     &__title {
-        color: $yellow;
+        color: $secondary-color;
     }
 
     &__separator {
-        border: solid $yellow;
+        border: solid $secondary-color;
     }
 
     &__content {
@@ -22,10 +22,10 @@
         background-color: $white;
         display: flex;
         margin-top: 8px;
-        padding: 4px;
+        padding: 4px;        
 
         &:hover {
-            background-color: $dark-gray;
+            background-color: $light-gray;
         }
     }
 }

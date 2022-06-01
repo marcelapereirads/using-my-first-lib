@@ -5,12 +5,12 @@
     margin: 32px;
 
     &__title {
-        color: $yellow;
+        color: $secondary-color;
         margin-bottom: 32px;
     }
 
     a {
-        color: $navy-blue;
+        color: $primary-color;
         text-decoration: underline;
     }
 }

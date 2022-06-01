@@ -222,81 +222,7 @@
                 "OnInit",
                 "OnDestroy"
             ],
-            "templateData": "<div class=\"page\">\n    <app-header></app-header>\n    <div class=\"page__content\">\n        <div *ngIf=\"menuIsOpen\" class=\"page__shaddow\">\n            <div class=\"page__sidebar\">\n                <app-sidebar-menu></app-sidebar-menu>\n            </div>\n        </div>\n        <div class=\"page__main\">\n            <router-outlet></router-outlet>\n        </div>\n    </div>\n</div>\n<lib-basic-component-library></lib-basic-component-library>"
-        },
-        {
-            "name": "ButtonComponent",
-            "id": "component-ButtonComponent-14951ec9b4d57ce95830144b2f1c396c",
-            "file": "src/app/components/button/button.component.ts",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "app-button",
-            "styleUrls": [
-                "./button.component.scss"
-            ],
-            "styles": [],
-            "templateUrl": [
-                "./button.component.html"
-            ],
-            "viewProviders": [],
-            "inputsClass": [
-                {
-                    "name": "action",
-                    "defaultValue": "() => {}",
-                    "line": 14
-                },
-                {
-                    "name": "disabled",
-                    "defaultValue": "false",
-                    "line": 13
-                },
-                {
-                    "name": "id",
-                    "defaultValue": "''",
-                    "line": 12
-                },
-                {
-                    "name": "text",
-                    "defaultValue": "'Button'",
-                    "line": 10
-                },
-                {
-                    "name": "type",
-                    "defaultValue": "'primary'",
-                    "line": 11,
-                    "type": "\"primary\" | \"secondary\""
-                }
-            ],
-            "outputsClass": [],
-            "propertiesClass": [],
-            "methodsClass": [
-                {
-                    "name": "handleClick",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 16
-                }
-            ],
-            "hostBindings": [],
-            "hostListeners": [],
-            "description": "",
-            "rawdescription": "",
-            "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\n\n@Component({\n  selector: 'app-button',\n  templateUrl: './button.component.html',\n  styleUrls: ['./button.component.scss']\n})\nexport class ButtonComponent {\n\n  @Input() text = 'Button';\n  @Input() type: 'primary' | 'secondary' = 'primary';\n  @Input() id = '';\n  @Input() disabled = false;\n  @Input() action = () => {};\n\n  handleClick() {\n    if (!this.disabled) {\n      this.action();\n    }\n  }\n}\n",
-            "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": "@import \"/src/assets/variables\";\n\nbutton {\n    border: none;\n    border-radius: 7px;\n    padding: 8px;\n    font-weight: bold;\n\n    &:hover {\n        text-decoration: underline;\n    }\n}\n\n.primary {\n    background-color: $navy-blue;\n    color: $white;\n}\n\n.secondary {\n    background-color: $yellow;\n    color: $navy-blue;\n}\n\n.disabled {\n    background-color: $light-gray;\n    color: $dark-gray;\n\n    &:hover {\n        text-decoration: none;\n        cursor: default;\n    }\n}\n",
-                    "styleUrl": "./button.component.scss"
-                }
-            ],
-            "stylesData": "",
-            "templateData": "<button [class]=\"type\" (click)=\"handleClick()\" [ngClass]=\"{disabled: disabled}\" id=\"id\">\n    {{text}}\n</button>"
+            "templateData": "<div class=\"page\">\n    <app-header></app-header>\n    <div class=\"page__content\">\n        <div *ngIf=\"menuIsOpen\" class=\"page__shaddow\">\n            <div class=\"page__sidebar\">\n                <app-sidebar-menu></app-sidebar-menu>\n            </div>\n        </div>\n        <div class=\"page__main\">\n            <router-outlet></router-outlet>\n        </div>\n    </div>\n</div>"
         },
         {
             "name": "ButtonPageComponent",
@@ -347,7 +273,7 @@
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
-            "templateData": "<app-default-page [title]=\"'Button'\" [code]=\"code\">\n    <app-button type=\"primary\" [action]=\"showAlert\"></app-button>\n</app-default-page>"
+            "templateData": "<app-default-page [title]=\"'Button'\" [code]=\"code\">\n    <lib-button type=\"primary\" [action]=\"showAlert\"></lib-button>\n</app-default-page>"
         },
         {
             "name": "DefaultPageComponent",
@@ -409,62 +335,12 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@import \"/src/assets/variables\";\n\n.default {\n    margin-top: 16px;\n\n    &__title {\n        color: $yellow;\n    }\n\n    &__separator {\n        border: solid $yellow;\n    }\n\n    &__content {\n        margin-top: 32px;\n        padding: 16px;\n        border: solid 1px;\n    }\n\n    &__action {\n        border: none;\n        background-color: $white;\n        display: flex;\n        margin-top: 8px;\n        padding: 4px;\n\n        &:hover {\n            background-color: $dark-gray;\n        }\n    }\n}\n\n.hide {\n    display: none;\n}\n\n.code {\n    background-color: $light-gray;\n}",
+                    "data": "@import \"/src/assets/variables\";\n\n.default {\n    margin-top: 16px;\n\n    &__title {\n        color: $secondary-color;\n    }\n\n    &__separator {\n        border: solid $secondary-color;\n    }\n\n    &__content {\n        margin-top: 32px;\n        padding: 16px;\n        border: solid 1px;\n    }\n\n    &__action {\n        border: none;\n        background-color: $white;\n        display: flex;\n        margin-top: 8px;\n        padding: 4px;        \n\n        &:hover {\n            background-color: $light-gray;\n        }\n    }\n}\n\n.hide {\n    display: none;\n}\n\n.code {\n    background-color: $light-gray;\n}",
                     "styleUrl": "./default-page.component.scss"
                 }
             ],
             "stylesData": "",
             "templateData": "<div class=\"default container\">\n    <h2 class=\"default__title\">{{title}}</h2>\n    <div class=\"default__separator\"></div>\n    <div class=\"default__content\">\n        <div class=\"default__preview\" [ngClass]=\"{hide: !showPreview}\">\n            <ng-content></ng-content>\n        </div>\n        <div class=\"default__code\" [ngClass]=\"{hide: showPreview}\">\n            {{code}}\n        </div>\n        <div class=\"d-flex justify-content-end\">\n            <button class=\"default__action\" (click)=\"changeView()\" [ngClass]=\"{code: !showPreview}\">\n                <img src=\"assets/svg/code.svg\" alt=\"code\" />\n            </button>\n        </div>\n    </div>\n</div>"
-        },
-        {
-            "name": "ErrorComponent",
-            "id": "component-ErrorComponent-50654f08d652aa17cfbc59cc452330e3",
-            "file": "src/app/components/error/error.component.ts",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "app-error",
-            "styleUrls": [
-                "./error.component.scss"
-            ],
-            "styles": [],
-            "templateUrl": [
-                "./error.component.html"
-            ],
-            "viewProviders": [],
-            "inputsClass": [
-                {
-                    "name": "control",
-                    "defaultValue": "new FormControl({value: null})",
-                    "line": 11,
-                    "type": "FormControl"
-                },
-                {
-                    "name": "message",
-                    "defaultValue": "''",
-                    "line": 12
-                }
-            ],
-            "outputsClass": [],
-            "propertiesClass": [],
-            "methodsClass": [],
-            "hostBindings": [],
-            "hostListeners": [],
-            "description": "",
-            "rawdescription": "",
-            "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { FormControl } from '@angular/forms';\n\n@Component({\n  selector: 'app-error',\n  templateUrl: './error.component.html',\n  styleUrls: ['./error.component.scss']\n})\nexport class ErrorComponent {\n\n  @Input() control = new FormControl({value: null});\n  @Input() message = '';\n}\n",
-            "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": ".error {\n    color: red;\n    align-items: baseline;\n\n    &__icon {\n        height: 14px;\n    }\n\n    &__message {\n        font-size: 14px;\n    }\n}",
-                    "styleUrl": "./error.component.scss"
-                }
-            ],
-            "stylesData": "",
-            "templateData": "<div *ngIf=\"control.touched && control.invalid\" class=\"error d-flex\">\n    <img src=\"assets/svg/error.svg\" alt=\"error\" class=\"error__icon\" />\n    <span class=\"error__message\">{{message}}</span>\n</div>"
         },
         {
             "name": "HamburgerButtonComponent",
@@ -506,7 +382,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@import \"/src/assets/variables\";\n\n.menu {\n    border: 0;\n    background-color: $navy-blue;\n}",
+                    "data": "@import \"/src/assets/variables\";\n\n.menu {\n    border: 0;\n    background-color: $primary-color;\n}",
                     "styleUrl": "./hamburger-button.component.scss"
                 }
             ],
@@ -573,7 +449,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@import \"/src/assets/variables\";\n\n.header {\n    background-color: $navy-blue;\n    align-items: center;\n    justify-content: space-evenly;\n\n    a {\n        color: $white;\n        text-align: center;\n        font-size: 2.5em;\n        font-family: Arial, Helvetica, sans-serif;\n        margin: 0;\n\n        &:hover {\n            text-decoration: none;\n        }\n    }\n}\n\n@media (min-width: $mobile-width) {\n    .header__menu {\n        display: none;\n    }\n}\n",
+                    "data": "@import \"/src/assets/variables\";\n\n.header {\n    background-color: $primary-color;\n    align-items: center;\n    justify-content: space-evenly;\n\n    a {\n        color: $white;\n        text-align: center;\n        font-size: 2.5em;\n        font-family: Arial, Helvetica, sans-serif;\n        margin: 0;\n\n        &:hover {\n            text-decoration: none;\n        }\n    }\n}\n\n@media (min-width: $mobile-width) {\n    .header__menu {\n        display: none;\n    }\n}\n",
                     "styleUrl": "./header.component.scss"
                 }
             ],
@@ -640,7 +516,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@import \"/src/assets/variables\";\n\n.home {\n\n    margin: 32px;\n\n    &__title {\n        color: $yellow;\n        margin-bottom: 32px;\n    }\n\n    a {\n        color: $navy-blue;\n        text-decoration: underline;\n    }\n}\n",
+                    "data": "@import \"/src/assets/variables\";\n\n.home {\n\n    margin: 32px;\n\n    &__title {\n        color: $secondary-color;\n        margin-bottom: 32px;\n    }\n\n    a {\n        color: $primary-color;\n        text-decoration: underline;\n    }\n}\n",
                     "styleUrl": "./home.component.scss"
                 }
             ],
@@ -655,108 +531,6 @@
                 "OnInit"
             ],
             "templateData": "<div class=\"home\">\n    <h2 class=\"home__title\">About the project</h2>\n    <p>This project is a component library, created to study the Storybook tool.</p>\n    <p>See the Storybook documentation <a href=\"https://storybook.js.org/\">here</a>.</p>\n</div>\n"
-        },
-        {
-            "name": "InputComponent",
-            "id": "component-InputComponent-85c96188372982e39d02d7a792f3ba02",
-            "file": "src/app/components/input/input.component.ts",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "app-input",
-            "styleUrls": [
-                "./input.component.scss"
-            ],
-            "styles": [],
-            "templateUrl": [
-                "./input.component.html"
-            ],
-            "viewProviders": [],
-            "inputsClass": [
-                {
-                    "name": "control",
-                    "defaultValue": "new FormControl({value: null})",
-                    "line": 17,
-                    "type": "FormControl"
-                },
-                {
-                    "name": "disabled",
-                    "defaultValue": "false",
-                    "line": 14
-                },
-                {
-                    "name": "errors",
-                    "defaultValue": "[]",
-                    "line": 16,
-                    "type": "Array<string>"
-                },
-                {
-                    "name": "id",
-                    "defaultValue": "'input'",
-                    "line": 13
-                },
-                {
-                    "name": "label",
-                    "defaultValue": "''",
-                    "line": 12
-                },
-                {
-                    "name": "mask",
-                    "defaultValue": "''",
-                    "line": 15
-                },
-                {
-                    "name": "type",
-                    "defaultValue": "'text'",
-                    "line": 11
-                }
-            ],
-            "outputsClass": [],
-            "propertiesClass": [],
-            "methodsClass": [
-                {
-                    "name": "ngOnChanges",
-                    "args": [
-                        {
-                            "name": "change",
-                            "type": "SimpleChanges"
-                        }
-                    ],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 19,
-                    "jsdoctags": [
-                        {
-                            "name": "change",
-                            "type": "SimpleChanges",
-                            "tagName": {
-                                "text": "param"
-                            }
-                        }
-                    ]
-                }
-            ],
-            "hostBindings": [],
-            "hostListeners": [],
-            "description": "",
-            "rawdescription": "",
-            "type": "component",
-            "sourceCode": "import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';\nimport { FormControl } from '@angular/forms';\n\n@Component({\n  selector: 'app-input',\n  templateUrl: './input.component.html',\n  styleUrls: ['./input.component.scss']\n})\nexport class InputComponent implements OnChanges {\n\n  @Input() type = 'text';\n  @Input() label = '';\n  @Input() id = 'input';\n  @Input() disabled = false;\n  @Input() mask = '';\n  @Input() errors: Array<string> = [];\n  @Input() control = new FormControl({value: null});\n\n  ngOnChanges(change: SimpleChanges) {\n    if (change.disabled?.currentValue) {\n      this.control.disable();\n    } else if (change.disabled?.currentValue === false) {\n      this.control.enable();\n    }\n  }\n\n}\n",
-            "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": "@import \"/src/assets/variables\";\n\n.input {\n    &__field {\n        border: solid 1px;\n        border-radius: 7px;\n\n        &:focus {\n            outline: none;\n        }\n    }\n}\n\n.disabled {\n    background-color: $light-gray;\n}",
-                    "styleUrl": "./input.component.scss"
-                }
-            ],
-            "stylesData": "",
-            "implements": [
-                "OnChanges"
-            ],
-            "templateData": "<div class=\"input d-flex flex-column\">\n    <label [for]=\"id\">{{label}}</label>\n    <input\n        [type]=\"type\"\n        [id]=\"id\"\n        class=\"input__field\"\n        [mask]=\"mask\"\n        [formControl]=\"control\"\n        [ngClass]=\"{disabled: disabled}\"\n    />\n    <app-error [message]=\"errors[0]\" [control]=\"control\"></app-error>\n</div>"
         },
         {
             "name": "InputPageComponent",
@@ -818,104 +592,7 @@
                     }
                 }
             },
-            "templateData": "<app-default-page [title]=\"'Input'\" [code]=\"code\">\n    <app-input\n        label=\"Input field\"\n        id=\"simple-input\"\n        [disabled]=\"false\"\n        [errors]=\"errors\"\n        [control]=\"control\"\n    >\n    </app-input>\n</app-default-page>"
-        },
-        {
-            "name": "SelectComponent",
-            "id": "component-SelectComponent-70e55c6e1fbf0ab3da236cd6c1aed4f4",
-            "file": "src/app/components/select/select.component.ts",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "app-select",
-            "styleUrls": [
-                "./select.component.scss"
-            ],
-            "styles": [],
-            "templateUrl": [
-                "./select.component.html"
-            ],
-            "viewProviders": [],
-            "inputsClass": [
-                {
-                    "name": "control",
-                    "defaultValue": "new FormControl({value: null})",
-                    "line": 20,
-                    "type": "FormControl"
-                },
-                {
-                    "name": "disabled",
-                    "defaultValue": "false",
-                    "line": 19
-                },
-                {
-                    "name": "error",
-                    "defaultValue": "''",
-                    "line": 21
-                },
-                {
-                    "name": "id",
-                    "defaultValue": "''",
-                    "line": 18
-                },
-                {
-                    "name": "label",
-                    "defaultValue": "''",
-                    "line": 17
-                },
-                {
-                    "name": "options",
-                    "defaultValue": "[{\n    value: '',\n    viewValue: ''\n  }]",
-                    "line": 13,
-                    "type": "Options"
-                }
-            ],
-            "outputsClass": [],
-            "propertiesClass": [],
-            "methodsClass": [
-                {
-                    "name": "ngOnChanges",
-                    "args": [
-                        {
-                            "name": "change",
-                            "type": "SimpleChanges"
-                        }
-                    ],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 23,
-                    "jsdoctags": [
-                        {
-                            "name": "change",
-                            "type": "SimpleChanges",
-                            "tagName": {
-                                "text": "param"
-                            }
-                        }
-                    ]
-                }
-            ],
-            "hostBindings": [],
-            "hostListeners": [],
-            "description": "",
-            "rawdescription": "",
-            "type": "component",
-            "sourceCode": "import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';\nimport { FormControl } from '@angular/forms';\n\nimport { Options } from '../../core/types/select.type';\n\n@Component({\n  selector: 'app-select',\n  templateUrl: './select.component.html',\n  styleUrls: ['./select.component.scss']\n})\nexport class SelectComponent implements OnChanges {\n\n  @Input() options: Options = [{\n    value: '',\n    viewValue: ''\n  }];\n  @Input() label = '';\n  @Input() id = '';\n  @Input() disabled = false;\n  @Input() control = new FormControl({value: null});\n  @Input() error = '';\n\n  ngOnChanges(change: SimpleChanges) {\n    if (change.disabled?.currentValue) {\n      this.control.disable();\n    } else if (change.disabled?.currentValue === false) {\n      this.control.enable();\n    }\n  }\n\n}\n",
-            "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": "@import \"/src/assets/variables\";\n\n.select {\n    &__field {\n        background-color: $white;\n        border: solid 1px;\n        border-radius: 7px;\n        height: 28px;\n\n        &:focus {\n            outline: none;\n        }\n    }\n\n    &__option {\n        &:checked {\n            background-color: $navy-blue;\n            color: $yellow;\n        }\n    }\n}\n\n.disabled {\n    background-color: $light-gray;\n}\n",
-                    "styleUrl": "./select.component.scss"
-                }
-            ],
-            "stylesData": "",
-            "implements": [
-                "OnChanges"
-            ],
-            "templateData": "<div class=\"select input d-flex flex-column\">\n    <label [for]=\"id\">{{label}}</label>\n    <select class=\"select__field\" [ngClass]=\"{disabled: disabled}\" [formControl]=\"control\">\n        <option></option>\n        <option *ngFor=\"let opt of options\" value=\"opt.value\" class=\"select__option\">{{ opt.viewValue }}</option>\n    </select>\n    <app-error [message]=\"error\" [control]=\"control\"></app-error>\n</div>"
+            "templateData": "<app-default-page [title]=\"'Input'\" [code]=\"code\">\n    <lib-input\n        label=\"Input field\"\n        id=\"simple-input\"\n        [disabled]=\"false\"\n        [errors]=\"errors\"\n        [control]=\"control\"\n    >\n    </lib-input>\n</app-default-page>"
         },
         {
             "name": "SelectPageComponent",
@@ -985,7 +662,7 @@
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
-            "templateData": "<app-default-page [title]=\"'Select'\" [code]=\"code\">\n    <app-select\n        [options]=\"options\"\n        [label]=\"'Select'\"\n        [id]=\"'select'\"\n        [control]=\"control\"\n        [error]=\"error\"\n    >\n    </app-select>\n</app-default-page>"
+            "templateData": "<app-default-page [title]=\"'Select'\" [code]=\"code\">\n    <lib-select\n        [options]=\"options\"\n        [label]=\"'Select'\"\n        [id]=\"'select'\"\n        [control]=\"control\"\n        [error]=\"error\"\n    >\n    </lib-select>\n</app-default-page>"
         },
         {
             "name": "SidebarMenuComponent",
@@ -1036,7 +713,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@import \"/src/assets/variables\";\n\n.menu {\n    height: 100%;\n    background-color: $white;\n\n    &__header {\n        padding: 8px;\n    }\n\n    &__title {\n        color: $yellow;\n        font-weight: bold;\n    }\n\n    &__list {\n        padding-left: 0;\n    }\n\n    &__item {\n       list-style-type: none;\n       border-bottom: 1px solid $light-gray;\n       font-size: 1.2rem;\n       padding-left: 2px;\n\n       .menu__link {\n           display: block;\n           padding: 4px 8px;\n       }\n\n       &:hover {\n           background-color: $dark-gray;\n       }\n    }\n\n    &__item--active {\n        background-color: $navy-blue;\n\n        .menu__link {\n            color: $yellow;\n        }\n\n        &:hover {\n            background-color: $navy-blue;\n        }\n    }\n\n    &__link {\n        color: $navy-blue;\n        &:hover {\n            text-decoration: none;\n        }\n    }\n}\n\n@media (min-width: $mobile-width) {\n    .menu__item {\n        font-size: 1rem;\n    }\n}\n",
+                    "data": "@import \"/src/assets/variables\";\n\n.menu {\n    height: 100%;\n    background-color: $white;\n\n    &__header {\n        padding: 8px;\n    }\n\n    &__title {\n        color: $secondary-color;\n        font-weight: bold;\n    }\n\n    &__list {\n        padding-left: 0;\n    }\n\n    &__item {\n       list-style-type: none;\n       border-bottom: 1px solid $light-gray;\n       font-size: 1.2rem;\n       padding-left: 2px;\n\n       .menu__link {\n           display: block;\n           padding: 4px 8px;\n           font-weight: bold;\n       }\n\n       &:hover {\n           background-color: $light-gray;\n       }\n    }\n\n    &__item--active {\n        background-color: $primary-color;\n\n        .menu__link {\n            color: $secondary-color;\n        }\n\n        &:hover {\n            background-color: $primary-color;\n        }\n    }\n\n    &__link {\n        color: $primary-color;\n        &:hover {\n            text-decoration: none;\n        }\n    }\n}\n\n@media (min-width: $mobile-width) {\n    .menu__item {\n        font-size: 1rem;\n    }\n}\n",
                     "styleUrl": "./sidebar-menu.component.scss"
                 }
             ],
@@ -1145,43 +822,6 @@
             ]
         },
         {
-            "name": "ButtonModule",
-            "children": [
-                {
-                    "type": "providers",
-                    "elements": []
-                },
-                {
-                    "type": "declarations",
-                    "elements": [
-                        {
-                            "name": "ButtonComponent"
-                        }
-                    ]
-                },
-                {
-                    "type": "imports",
-                    "elements": []
-                },
-                {
-                    "type": "exports",
-                    "elements": [
-                        {
-                            "name": "ButtonComponent"
-                        }
-                    ]
-                },
-                {
-                    "type": "bootstrap",
-                    "elements": []
-                },
-                {
-                    "type": "classes",
-                    "elements": []
-                }
-            ]
-        },
-        {
             "name": "ButtonPageModule",
             "children": [
                 {
@@ -1199,9 +839,6 @@
                 {
                     "type": "imports",
                     "elements": [
-                        {
-                            "name": "ButtonModule"
-                        },
                         {
                             "name": "DefaultPageModule"
                         }
@@ -1259,43 +896,6 @@
             ]
         },
         {
-            "name": "ErrorModule",
-            "children": [
-                {
-                    "type": "providers",
-                    "elements": []
-                },
-                {
-                    "type": "declarations",
-                    "elements": [
-                        {
-                            "name": "ErrorComponent"
-                        }
-                    ]
-                },
-                {
-                    "type": "imports",
-                    "elements": []
-                },
-                {
-                    "type": "exports",
-                    "elements": [
-                        {
-                            "name": "ErrorComponent"
-                        }
-                    ]
-                },
-                {
-                    "type": "bootstrap",
-                    "elements": []
-                },
-                {
-                    "type": "classes",
-                    "elements": []
-                }
-            ]
-        },
-        {
             "name": "HeaderModule",
             "children": [
                 {
@@ -1339,47 +939,6 @@
             ]
         },
         {
-            "name": "InputModule",
-            "children": [
-                {
-                    "type": "providers",
-                    "elements": []
-                },
-                {
-                    "type": "declarations",
-                    "elements": [
-                        {
-                            "name": "InputComponent"
-                        }
-                    ]
-                },
-                {
-                    "type": "imports",
-                    "elements": [
-                        {
-                            "name": "ErrorModule"
-                        }
-                    ]
-                },
-                {
-                    "type": "exports",
-                    "elements": [
-                        {
-                            "name": "InputComponent"
-                        }
-                    ]
-                },
-                {
-                    "type": "bootstrap",
-                    "elements": []
-                },
-                {
-                    "type": "classes",
-                    "elements": []
-                }
-            ]
-        },
-        {
             "name": "InputPageModule",
             "children": [
                 {
@@ -1399,56 +958,12 @@
                     "elements": [
                         {
                             "name": "DefaultPageModule"
-                        },
-                        {
-                            "name": "InputModule"
                         }
                     ]
                 },
                 {
                     "type": "exports",
                     "elements": []
-                },
-                {
-                    "type": "bootstrap",
-                    "elements": []
-                },
-                {
-                    "type": "classes",
-                    "elements": []
-                }
-            ]
-        },
-        {
-            "name": "SelectModule",
-            "children": [
-                {
-                    "type": "providers",
-                    "elements": []
-                },
-                {
-                    "type": "declarations",
-                    "elements": [
-                        {
-                            "name": "SelectComponent"
-                        }
-                    ]
-                },
-                {
-                    "type": "imports",
-                    "elements": [
-                        {
-                            "name": "ErrorModule"
-                        }
-                    ]
-                },
-                {
-                    "type": "exports",
-                    "elements": [
-                        {
-                            "name": "SelectComponent"
-                        }
-                    ]
                 },
                 {
                     "type": "bootstrap",
@@ -1480,9 +995,6 @@
                     "elements": [
                         {
                             "name": "DefaultPageModule"
-                        },
-                        {
-                            "name": "SelectModule"
                         }
                     ]
                 },
@@ -1551,60 +1063,12 @@
     "miscellaneous": {
         "variables": [
             {
-                "name": "action",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/button.stories.ts",
-                "type": "",
-                "defaultValue": "() => alert('clicked')"
-            },
-            {
                 "name": "components",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/core/header/header.module.ts",
                 "type": "[]",
                 "defaultValue": "[HeaderComponent, HamburgerButtonComponent]"
-            },
-            {
-                "name": "Disabled",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/button.stories.ts",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "Disabled",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/input.stories.ts",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "Disabled",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/select.stories.ts",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "Enabled",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/input.stories.ts",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "Enabled",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/select.stories.ts",
-                "type": "",
-                "defaultValue": "Template.bind({})"
             },
             {
                 "name": "environment",
@@ -1621,145 +1085,12 @@
                 "file": "src/environments/environment.ts",
                 "type": "object",
                 "defaultValue": "{\n  production: false\n}"
-            },
-            {
-                "name": "Error",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/input.stories.ts",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "Error",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/select.stories.ts",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "Masked",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/input.stories.ts",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "options",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/select.stories.ts",
-                "type": "[]",
-                "defaultValue": "[\n    {\n        value: 'option1',\n        viewValue: 'Option 1'\n    },\n    {\n        value: 'option2',\n        viewValue: 'Option 2'\n    }\n]"
-            },
-            {
-                "name": "Primary",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/button.stories.ts",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "Secondary",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/button.stories.ts",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/button.stories.ts",
-                "type": "Story<ButtonComponent>",
-                "defaultValue": "(args: ButtonComponent) => ({\n  props: args,\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/input.stories.ts",
-                "type": "Story<InputComponent>",
-                "defaultValue": "(args: InputComponent) => ({\n  props: args,\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/stories/select.stories.ts",
-                "type": "Story<SelectComponent>",
-                "defaultValue": "(args: SelectComponent) => ({\n  props: args,\n})"
             }
         ],
         "functions": [],
-        "typealiases": [
-            {
-                "name": "Option",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "literal type",
-                "file": "src/app/core/types/select.type.ts",
-                "description": "",
-                "kind": 165
-            },
-            {
-                "name": "Options",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "Array<Option>",
-                "file": "src/app/core/types/select.type.ts",
-                "description": "",
-                "kind": 161
-            }
-        ],
+        "typealiases": [],
         "enumerations": [],
         "groupedVariables": {
-            "src/stories/button.stories.ts": [
-                {
-                    "name": "action",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/button.stories.ts",
-                    "type": "",
-                    "defaultValue": "() => alert('clicked')"
-                },
-                {
-                    "name": "Disabled",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/button.stories.ts",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Primary",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/button.stories.ts",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Secondary",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/button.stories.ts",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/button.stories.ts",
-                    "type": "Story<ButtonComponent>",
-                    "defaultValue": "(args: ButtonComponent) => ({\n  props: args,\n})"
-                }
-            ],
             "src/app/core/header/header.module.ts": [
                 {
                     "name": "components",
@@ -1768,90 +1099,6 @@
                     "file": "src/app/core/header/header.module.ts",
                     "type": "[]",
                     "defaultValue": "[HeaderComponent, HamburgerButtonComponent]"
-                }
-            ],
-            "src/stories/input.stories.ts": [
-                {
-                    "name": "Disabled",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/input.stories.ts",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Enabled",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/input.stories.ts",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Error",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/input.stories.ts",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Masked",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/input.stories.ts",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/input.stories.ts",
-                    "type": "Story<InputComponent>",
-                    "defaultValue": "(args: InputComponent) => ({\n  props: args,\n})"
-                }
-            ],
-            "src/stories/select.stories.ts": [
-                {
-                    "name": "Disabled",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/select.stories.ts",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Enabled",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/select.stories.ts",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Error",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/select.stories.ts",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "options",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/select.stories.ts",
-                    "type": "[]",
-                    "defaultValue": "[\n    {\n        value: 'option1',\n        viewValue: 'Option 1'\n    },\n    {\n        value: 'option2',\n        viewValue: 'Option 2'\n    }\n]"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/select.stories.ts",
-                    "type": "Story<SelectComponent>",
-                    "defaultValue": "(args: SelectComponent) => ({\n  props: args,\n})"
                 }
             ],
             "src/environments/environment.prod.ts": [
@@ -1877,28 +1124,7 @@
         },
         "groupedFunctions": {},
         "groupedEnumerations": {},
-        "groupedTypeAliases": {
-            "src/app/core/types/select.type.ts": [
-                {
-                    "name": "Option",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "literal type",
-                    "file": "src/app/core/types/select.type.ts",
-                    "description": "",
-                    "kind": 165
-                },
-                {
-                    "name": "Options",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "Array<Option>",
-                    "file": "src/app/core/types/select.type.ts",
-                    "description": "",
-                    "kind": 161
-                }
-            ]
-        }
+        "groupedTypeAliases": {}
     },
     "routes": {
         "name": "<root>",
@@ -1940,42 +1166,6 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "AppComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/8",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/button/button.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "ButtonComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/7",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/error/error.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "ErrorComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/3",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/input/input.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "InputComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/9",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/select/select.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "SelectComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/8",
                 "status": "low"
@@ -2096,156 +1286,6 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "environment",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "action",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Disabled",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Primary",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Secondary",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/button.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Template",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/input.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Disabled",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/input.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Enabled",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/input.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Error",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/input.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Masked",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/input.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Template",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/select.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Disabled",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/select.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Enabled",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/select.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Error",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/select.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "options",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/stories/select.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Template",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
